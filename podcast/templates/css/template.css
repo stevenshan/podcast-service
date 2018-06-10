@@ -1,0 +1,354 @@
+/* Stylesheet for generic template page */
+
+body {
+    margin: 0px;
+    font-family: 'Lato', sans-serif;
+    background-color: #ebebeb;
+}
+
+/*
+===========================================
+ General - remove default browser style
+===========================================
+*/
+
+a {
+    text-decoration: inherit;
+    color: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+input {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+input::placeholder {
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    opacity: 1;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+li {
+    display: inline-block;
+}
+
+/*
+===========================================
+Basic Page Structure
+===========================================
+*/
+
+body:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 230px;
+    background: #5fa8ef;
+    z-index: -1;
+}
+
+/*
+===========================================
+Header - top section of screen
+===========================================
+*/
+
+header {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 30px 40px;
+    padding-bottom: 50px;
+}
+
+header:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+header > div {
+    height: 60px;
+}
+
+/*
+-------------------------------------------
+Title Section - left section of header
+-------------------------------------------
+*/
+
+header #titleSection {
+    float: left;
+    line-height: 60px;
+    padding-right: 30px;
+    width: 230px;
+}
+
+header #titleSection #title {
+    display: inline-block;
+    font-size: 23px;
+    font-weight: bolder;
+    color: #ffffff;
+    vertical-align: middle;
+    line-height: initial;
+    letter-spacing: 1px;
+}
+
+header #titleSection #title span {
+    font-size: 16px;
+    font-weight: normal;
+    color: rgb(255, 255, 255, 0.6);
+    display: block;
+    letter-spacing: initial;
+}
+
+/*
+-------------------------------------------
+Search Section - center of header
+-------------------------------------------
+*/
+
+header #searchBar form {
+    position: relative;
+    overflow: hidden;
+    padding-right: 30px;
+    height: 60px;
+}
+
+header #searchBar #searchInput {
+    width: 100%;
+    padding: 0px 20px 0px 60px;
+    height: 100%;
+    border-radius: 2px;
+    background: rgb(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-size: 15px;
+}
+
+header #searchBar #searchInput + label {
+    display: block;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    margin: auto;
+    background-image: url("../imgs/search.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    cursor: pointer;
+}
+
+header #searchBar #searchInput + label:hover {
+    opacity: 0.6;
+}
+
+/* action on focus search bar */
+
+header #searchBar #searchInput.focused {
+    background: #ffffff;
+    color: rgb(0, 0, 0, 0.6);
+}
+
+header #searchBar #searchInput.focused::placeholder {
+    color: rgb(0, 0, 0, 0.6);
+}
+
+header #searchBar #searchInput.focused {
+    background: #ffffff;
+}
+
+header #searchBar #searchInput.focused + label {
+    background-image: url("../imgs/backspace.svg");
+}
+
+/*
+-------------------------------------------
+Settings Menu - right section of header
+-------------------------------------------
+*/
+
+header #settingsMenu {
+    float: right;
+    line-height: 60px;
+    position: relative;
+}
+
+header #settingsMenu #navMenu {
+    display: inline-block;
+    background: #ffffff;
+    font-size: 0px;
+    height: 100%;
+    position: relative;
+    margin-right: 15px;
+    border-radius: 2px;
+}
+
+header #settingsMenu #navMenu li {
+    height: 100%;
+}
+
+header #settingsMenu #navMenu li a {
+    font-size: 13px;
+    font-weight: bolder;
+    color: rgb(0, 0, 0, 0.6);
+    text-transform: uppercase;
+    padding: 0px 20px;
+    display: inline-block;
+    height: 100%;
+    position: relative;
+}
+
+header #settingsMenu #navMenu li.active a {
+    color: #51a543;
+}
+
+header #settingsMenu #navMenu li.active a:before {
+    display: block;
+    position: absolute;
+    content: "";
+    background: #51a543;
+    left: 20px; /* cancel out padding */
+    right: 20px;
+    width: auto;
+    height: 5px;
+}
+
+header #settingsMenu #userMenu {
+    background-image: url("../imgs/account.svg");
+    background-color: #bfbfbf;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 120%; 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*
+===========================================
+Main - everything below the header
+===========================================
+*/
+
+#main {
+    position: relative;
+    display: block;
+    padding: 0px 40px 30px 270px;
+}
+
+/*
+-------------------------------------------
+Sidebar - menu on the left of screen
+-------------------------------------------
+*/
+
+#sidebar {
+    left: 0px;
+    position: absolute;
+}
+
+/*
+Top Sidebar - upper section with only 2 buttons
+*/
+
+#main #sidebar #topSidebar {
+    height: 90px;
+    line-height: 90px;
+    padding-left: 40px;
+    position: relative;
+    font-size: 0px;
+    margin-bottom: 20px;
+}
+
+#main #sidebar #topSidebar div {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    margin-right: 15px;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    background-color: rgb(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Icons in top sidebar */
+
+#main #sidebar #topSidebar #dashboardLink {
+    background-image: url("../imgs/dashboard.svg");
+}
+
+#main #sidebar #topSidebar #notificationLink {
+    background-image: url("../imgs/notification.svg");
+}
+
+/* Icon hover action */
+
+#main #sidebar #topSidebar div:hover {
+    background-color: rgb(255, 255, 255, 1);
+}
+
+#main #sidebar #topSidebar #dashboardLink:hover {
+    background-image: url("../imgs/dashboard.hover.svg");
+}
+
+#main #sidebar #topSidebar #notificationLink:hover {
+    background-image: url("../imgs/notification.hover.svg");
+}
+
+/*
+Bottom Sidebar - menu on left with vertically stacked links
+*/
+
+#main #sidebar #menuSidebar {
+    position: relative;
+    width: 270px;
+}
+
+#main #sidebar #menuSidebar li {
+   display: block;
+   width: 100%;
+}
+
+#main #sidebar #menuSidebar li a {
+    display: block;
+    padding: 15px 0px 15px 75px;
+}
+
+/* when link is hovered or already active */
+#main #sidebar #menuSidebar li a:hover,
+#main #sidebar #menuSidebar li.active {
+    background: #F3F3F3;
+}
+
+
+#content {
+    background: white;
+    min-height: 600px;
+    border-radius: 2px;
+}
