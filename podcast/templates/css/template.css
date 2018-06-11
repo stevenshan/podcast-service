@@ -1,4 +1,7 @@
-/* Stylesheet for generic template page */
+/* 
+Stylesheet for generic template page displaying search results
+or subscription lists
+*/
 
 body {
     margin: 0px;
@@ -134,7 +137,6 @@ Search Section - center of header
 header #searchBar form {
     position: relative;
     overflow: hidden;
-    padding-right: 30px;
     height: 60px;
 }
 
@@ -148,7 +150,8 @@ header #searchBar #searchInput {
     font-size: 15px;
 }
 
-header #searchBar #searchInput + label {
+header #searchBar #searchInput + label,
+header #searchBar #searchBarToggle {
     display: block;
     width: 60px;
     height: 60px;
@@ -170,21 +173,61 @@ header #searchBar #searchInput + label:hover {
 
 /* action on focus search bar */
 
-header #searchBar #searchInput.focused {
+header #searchBar.focused #searchInput {
     background: #ffffff;
     color: rgb(0, 0, 0, 0.6);
 }
 
-header #searchBar #searchInput.focused::placeholder {
+header #searchBar.focused #searchInput::placeholder {
     color: rgb(0, 0, 0, 0.6);
 }
 
-header #searchBar #searchInput.focused {
+header #searchBar.focused #searchInput {
     background: #ffffff;
 }
 
-header #searchBar #searchInput.focused + label {
+header #searchBar.focused #searchInput + label {
     background-image: url("../imgs/backspace.svg");
+}
+
+/*
+Minimized version of search bar
+*/
+
+header #searchBar #searchBarToggle {
+    position: relative;
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    background-size: 100%;
+    display: none;
+}
+
+header #searchBar.minimized #searchBarToggle {
+    display: block;
+}
+
+header #searchBar.minimized form {
+    display: none;
+}
+
+header #searchBarToggleStatus:checked + #searchBar {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+}
+
+header #searchBarToggleStatus:checked + #searchBar form {
+    display: block;
+}
+
+header #searchBarToggleStatus:checked + #searchBar form #searchInput {
+    display: block;
+}
+
+header #searchBarToggleStatus:checked + #searchBar #searchBarToggle {
+    display: none;
 }
 
 /*
@@ -197,8 +240,10 @@ Settings Menu - right section of header
 
 header #settingsMenu {
     float: right;
+    padding-left: 30px;
     line-height: 60px;
     position: relative;
+    margin-top: -1px; /* some weird offset glitch */
 }
 
 header #settingsMenu #navMenu {
@@ -207,7 +252,7 @@ header #settingsMenu #navMenu {
     font-size: 0px;
     height: 60px;
     position: relative;
-    border-radius: 2px 0px 0px 2px;
+    border-radius: 2px;
 }
 
 header #settingsMenu #navMenu li {

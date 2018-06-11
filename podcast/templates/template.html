@@ -15,6 +15,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/template.css" rel="stylesheet" type="text/css">
+    <link href="css/template.mobile.css" rel="stylesheet" type="text/css">
 
     <!-- Javascript Libraries -->
     <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -22,14 +23,19 @@
     <script src="js/template.js" type="text/javascript"></script>
   </head>
   <body>
+    <!-- Header section with title, search bar, and page navigation -->
     <header>
+      <!-- Title section showing website name (left) -->
       <div id="titleSection">
         <a id="title">
           Podcasts
           <span>Discover, Search, Share</span>
         </a>
       </div>
+
+      <!-- Section with user profile button and page navigation menu -->
       <div id="settingsMenu">
+        <!-- Contracts to show first 3 links by default -->
         <ul id="navMenu">
           <li class="active">
             <a>Page 1</a>
@@ -46,26 +52,43 @@
           <li>
             <a>Page 5</a>
           </li>
+
+          <!-- Button to expand navigation menu to show past first 3 links -->
           <div title="Expand Menu" id="navMenuToggle">
+            <!-- Ellipses for ... symbolizing expand -->
             &#9679;&#9679;&#9679; 
           </div>
         </ul>
+
+        <!-- User profile menu button -->
         <div id="userMenu">
         </div>
       </div>
+
+      <!-- searchBarToggleStatus used to toggle minimized search bar -->
+      <input type="checkbox" class="inputToggle" id="searchBarToggleStatus">
+      <!-- Search bar -->
       <div id="searchBar">
+        <label id="searchBarToggle" for="searchBarToggleStatus"></label>
         <form>
           <input type="text" name="query" id="searchInput" placeholder="Search for podcasts & subscriptions">
           <label></label>
         </form>
       </div>
     </header>
+
+    <!-- Main Section -->
     <section id="main">
+
+      <!-- Side bar to the left of screen below header -->
       <div id="sidebar">
+        <!-- Top section of sidebar with two circular buttons -->
         <div id="topSidebar">
           <div id="dashboardLink"></div>
           <div id="notificationLink"></div>
         </div>
+
+        <!-- Bottom section of sidebar with vertically stacked links -->
         <ul id="menuSidebar">
           <li>
             <a>1</a>
