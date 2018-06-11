@@ -4,6 +4,42 @@ $(function(){ // on page load
 
     /*
     -------------------------------------------
+    Navigation Menu Setup
+    -------------------------------------------
+    */
+
+    if ($("#settingsMenu #navMenu li").length > 3)
+    {
+        var count = 0;
+        $("#settingsMenu #navMenuToggle").css("display", "inline-block");
+        $("#settingsMenu #navMenu li").each(function(){
+            if (count < 3)
+            {
+                $(this).addClass("firstThree");
+            }
+            count += 1;
+        });
+
+        /* minimize menu if anything else is clicked */
+
+        $("#settingsMenu #navMenuToggle").click(function(e){
+            e.stopPropagation();
+            if (!$("#settingsMenu #navMenu").hasClass("expanded"))
+            {
+                $("#settingsMenu #navMenu").addClass("expanded");
+            }
+        });
+
+        $("body").click(function(){
+            if ($("#settingsMenu #navMenu").hasClass("expanded"))
+            {
+                $("#settingsMenu #navMenu").removeClass("expanded");
+            }
+        });
+    }
+
+    /*
+    -------------------------------------------
     Search bar events
     -------------------------------------------
     */
@@ -19,7 +55,10 @@ $(function(){ // on page load
         .focusout(function(){ // when focus leaves
             if ($(this).val() == "") // if search bar is empty
             {
-                focusOutEvent($(this));
+                var elem = this;
+                window.setTimeout(function() {
+                    focusOutEvent($(elem));
+                }, 50);
             }
         });
 
@@ -31,6 +70,7 @@ $(function(){ // on page load
         }
         else {
             input.focus();
+            console.log("focus");
         }
     });
 
