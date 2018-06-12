@@ -23,10 +23,15 @@
     <script src="js/template.js" type="text/javascript"></script>
   </head>
   <body>
+    <!-- whitish layer above screen for menu -->
+    <div id="bgOverlay"></div>
+
     <!-- Header section with title, search bar, and page navigation -->
     <header>
       <!-- Title section showing website name (left) -->
       <div id="titleSection">
+        <!-- Button to show or hide sidebar on mobile device -->
+        <div id="menuSidebarToggle" class="material-icons" title="Expand Menu">menu</div>
         <a id="title">
           Podcasts
           <span>Discover, Search, Share</span>
@@ -54,9 +59,8 @@
           </li>
 
           <!-- Button to expand navigation menu to show past first 3 links -->
-          <div title="Expand Menu" id="navMenuToggle">
-            <!-- Ellipses for ... symbolizing expand -->
-            &#9679;&#9679;&#9679; 
+          <div title="Expand Menu" id="navMenuToggle" title="Expand Menu">
+            <div>&nbsp;</div>
           </div>
         </ul>
 
@@ -82,10 +86,13 @@
 
       <!-- Side bar to the left of screen below header -->
       <div id="sidebar">
+        <div id="sidebarHead">
+          <i class="material-icons">arrow_back</i> 
+        </div>
         <!-- Top section of sidebar with two circular buttons -->
         <div id="topSidebar">
-          <div id="dashboardLink"></div>
-          <div id="notificationLink"></div>
+          <div id="dashboardLink" title="User Dashboard"></div>
+          <div id="notificationLink" title="Notifications"></div>
         </div>
 
         <!-- Bottom section of sidebar with vertically stacked links -->

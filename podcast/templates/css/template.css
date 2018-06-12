@@ -11,7 +11,7 @@ body {
 
 /*
 ===========================================
- General
+ General - mostly stuff to get rid of default styling
 ===========================================
 */
 
@@ -106,7 +106,7 @@ header #titleSection {
     float: left;
     line-height: 60px;
     padding-right: 30px;
-    width: 230px;
+    width: 250px;
     font-size: 0px;
 }
 
@@ -126,6 +126,20 @@ header #titleSection #title span {
     color: rgb(255, 255, 255, 0.6);
     display: block;
     letter-spacing: initial;
+}
+
+/* Button to toggle sidebar on mobile */
+header #titleSection #menuSidebarToggle {
+    color: #ffffff;
+    text-align: center;
+    line-height: 60px;
+    height: 60px;
+    font-size: 25px;
+    top: 0px;
+    width: 50px;
+    float: left;
+    cursor: pointer;
+    display: none; /* mobile template makes visible */
 }
 
 /*
@@ -204,14 +218,6 @@ header #searchBar #searchBarToggle {
     display: none;
 }
 
-header #searchBar.minimized #searchBarToggle {
-    display: block;
-}
-
-header #searchBar.minimized form {
-    display: none;
-}
-
 header #searchBarToggleStatus:checked + #searchBar {
     position: absolute;
     left: 40px;
@@ -263,7 +269,7 @@ header #settingsMenu #navMenu li a {
     font-size: 13px;
     font-weight: bolder;
     color: rgb(0, 0, 0, 0.6);
-    text-transform: uppercase;
+    text-transform: uppercase; /* make menu buttons uppercase */
     padding: 0px 20px;
     display: inline-block;
     height: 100%;
@@ -289,15 +295,23 @@ header #settingsMenu #navMenu li.active a:before {
 /* Expanding styling for menu */
 
 header #settingsMenu #navMenu #navMenuToggle {
+    height: 100%;
+}
+
+header #settingsMenu #navMenu #navMenuToggle div {
     font-size: 13px;
     font-weight: bolder;
     color: rgb(0, 0, 0, 0.6);
     text-transform: uppercase;
-    padding-right: 20px;
+    padding: 0px 20px;
     display: inline-block;
-    height: 60px;
+    height: 100%;
     position: relative;
+    background-image: url("../imgs/horiz.svg");
+    background-repeat: no-repeat;
+    background-position: left center;
     cursor: pointer;
+    opacity: 0.6;
 }
 
 header #settingsMenu #navMenu li {
@@ -353,6 +367,30 @@ Sidebar - menu on the left of screen
 #sidebar {
     left: 0px;
     position: absolute;
+}
+
+/* only displays for mobile */
+#sidebar #sidebarHead {
+    display: none; /* mobile template makes visible */
+    position: relative;
+}
+
+/* button to close sidebar */
+#sidebar #sidebarHead i {
+    background-color: rgb(0, 0, 0, 0.4);
+    color: #b2d6f4;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 23px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 40px;
+    margin: auto;
+    cursor: pointer;
 }
 
 /*
@@ -431,6 +469,11 @@ Bottom Sidebar - menu on left with vertically stacked links
     background: #F3F3F3;
 }
 
+/*
+-------------------------------------------
+Content - main area in center of screen
+-------------------------------------------
+*/
 
 #content {
     background: white;

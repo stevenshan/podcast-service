@@ -80,6 +80,21 @@ $(function(){ // on page load
 
     /*
     -------------------------------------------
+    Sidebar Minimization
+    -------------------------------------------
+    */
+    // open sidebar
+    $("#menuSidebarToggle").click(function(){
+        $("body").addClass("menuOpen");
+    });
+
+    var minimizeSidebar = function() {
+        $("body").removeClass("menuOpen");
+    };
+    $("#bgOverlay, #sidebarHead i").click(minimizeSidebar);
+
+    /*
+    -------------------------------------------
     Search bar minimization
     -------------------------------------------
     */
