@@ -391,7 +391,7 @@ header #settingsMenu #navMenuClose {
 
 /* User icon styling */
 
-header #settingsMenu #userMenu {
+header #settingsMenu #userMenuButton {
     background-image: url("../imgs/account.svg");
     background-color: #bfbfbf;
     background-repeat: no-repeat;
@@ -403,6 +403,61 @@ header #settingsMenu #userMenu {
     display: inline-block;
     vertical-align: middle;
     margin-left: 15px;
+    cursor: pointer;
+}
+
+/*
+-------------------------------------------
+User Menu Styling
+-------------------------------------------
+*/
+
+#userMenu {
+    position: fixed;
+    background: #ffffff;
+    border-radius: 2px;
+    top: 105px;
+    right: 40px;
+    width: 200px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: none; /* initially hidden */
+}
+
+/* reveal menu */
+#userMenu.maximized {
+    display: block;
+}
+
+/* little triangle pointing up to user icon */
+#userMenu:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -11px;
+    right: 8px;
+    width: 0; 
+    height: 0; 
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #ffffff;
+}
+
+#userMenu > span {
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #cecece;
+}
+
+#userMenu > a {
+    display: block;
+    padding: 15px 10px;
+    text-align: center;
+    line-height: normal;
+}
+
+#userMenu > a:hover {
+    background: #f5f5f5;
 }
 
 /*

@@ -130,7 +130,7 @@ $(function(){ // on page load
 
     /*
     -------------------------------------------
-    Navigation Menu Full Screen Gradient
+    Navigation Menu Full Screen Colors
     -------------------------------------------
     */
 
@@ -141,5 +141,27 @@ $(function(){ // on page load
         counter += 1;
     });
 
+    /*
+    -------------------------------------------
+    Show user settings menu
+    -------------------------------------------
+    */
+
+    $("#userMenuButton").click(function(e){
+        $("#userMenu").addClass("maximized");
+        e.stopPropagation();
+    });
+
+    $("#userMenu").click(function(e){
+        e.stopPropagation();
+    });
+
+    $("#userMenu, #userMenuButton").bind('touchstart mousedown', function(event) {
+        event.stopPropagation();
+    });
+
+    $(document).bind('touchstart mousedown', function(event) {
+        $("#userMenu").removeClass("maximized");
+    });
 
 });

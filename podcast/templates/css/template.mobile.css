@@ -180,8 +180,12 @@ in template.css and only made visible here
     User Settings Menu
     */
 
-    header #settingsMenu #userMenu {
+    header #settingsMenu #userMenuButton {
         margin-left: 10px;
+    }
+
+    header #settingsMenu #userMenu {
+        right: 15px;
     }
 
     /*
