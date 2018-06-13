@@ -128,4 +128,18 @@ $(function(){ // on page load
         }, 50);
     });
 
+    /*
+    -------------------------------------------
+    Navigation Menu Full Screen Gradient
+    -------------------------------------------
+    */
+
+    var counter = 0;
+    var limit = 5;
+    $("#settingsMenu #navMenu li").each(function(){
+        $(this).addClass("color" + (counter % limit + 1));
+        counter += 1;
+    });
+
+
 });

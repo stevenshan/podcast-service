@@ -219,6 +219,7 @@ in template.css and only made visible here
         width: 100%;
         height: 100%;
         z-index: 1000;
+        background: transparent;
     }
 
     #settingsMenu.maximized #navMenu li {
@@ -228,15 +229,43 @@ in template.css and only made visible here
         text-align: center;
     }
 
+    /* Assorted background colors for menu buttons */
+    #settingsMenu.maximized #navMenu li.color1 { background: #ff9800; }
+    #settingsMenu.maximized #navMenu li.color2 { background: #8bc34a; }
+    #settingsMenu.maximized #navMenu li.color3 { background: #03a9f4; }
+    #settingsMenu.maximized #navMenu li.color4 { background: #00bcd4; }
+    #settingsMenu.maximized #navMenu li.color5 { background: #ffc107; }
+
     #settingsMenu.maximized #navMenu li a {
         display: table-cell;
         height: auto !important;
         vertical-align: middle;
         font-size: 25px;
+        color: #ffffff !important;
     }
 
-    #settingsMenu.maximized #navMenu li a:before {
-        display: none !important;
+    #settingsMenu.maximized #navMenu li.active a:before {
+        top: 0px; 
+        bottom: 0px;
+        margin: auto;
+        width: 50% !important;
+        left: -150px !important;
+        right: auto !important;
+        background: #ffffff !important;
+    }
+
+    #settingsMenu.maximized #navMenu li.active a:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0px; 
+        bottom: 0px;
+        margin: auto;
+        height: 5px;
+        width: 50%;
+        left: auto;
+        right: -150px;
+        background: #ffffff;
     }
 
     /* make button to close menu visible */

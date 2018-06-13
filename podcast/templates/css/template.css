@@ -385,6 +385,7 @@ header #settingsMenu #navMenuClose {
     text-align: center;
     font-size: 40px;
     cursor: pointer;
+    color: #ffffff;
     display: none; /* made visible in mobile stylesheet */
 }
 
