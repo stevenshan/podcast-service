@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="description" content="Podcast discovery and subscription manager">
     <meta name="keywords" content="podcast search discover">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 
     <title>Podcasts</title>
 
     <!-- Fonts -->
-    <!-- https://fonts.googleapis.com/css?family=Lato -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> -->
     <link href="css/fonts/lato.css" rel="stylesheet">
     <link href="css/fonts/material-fonts.css" rel="stylesheet">
 
@@ -26,89 +26,111 @@
     <!-- whitish layer above screen for menu -->
     <div id="bgOverlay"></div>
 
-    <!-- Header section with title, search bar, and page navigation -->
-    <header>
-      <!-- Title section showing website name (left) -->
-      <div id="titleSection">
-        <!-- Button to show or hide sidebar on mobile device -->
-        <div id="menuSidebarToggle" class="material-icons" title="Expand Menu">menu</div>
-        <a id="title">
-          Podcasts
-          <span>Discover, Search, Share</span>
-        </a>
-      </div>
+    <!-- wrapper to make footer stick to bottom -->
+    <div id="wrapper">
+      <!-- Header section with title, search bar, and page navigation -->
+      <header>
+        <!-- Title section showing website name (left) -->
+        <div id="titleSection">
+          <!-- Button to show or hide sidebar on mobile device -->
+          <div id="menuSidebarToggle" class="material-icons" title="Expand Menu">menu</div>
+          <a id="title">
+            Podcasts
+            <span>Discover, Search, Share</span>
+          </a>
+        </div>
 
-      <!-- Section with user profile button and page navigation menu -->
-      <div id="settingsMenu">
-        <!-- Contracts to show first 3 links by default -->
-        <ul id="navMenu">
-          <li class="active">
-            <a>Page 1</a>
-          </li>
-          <li>
-            <a>Page 2</a>
-          </li>
-          <li>
-            <a>Page 3</a>
-          </li>
-          <li>
-            <a>Page 4</a>
-          </li>
-          <li>
-            <a>Page 5</a>
-          </li>
+        <!-- Section with user profile button and page navigation menu -->
+        <div id="settingsMenu">
 
-          <!-- Button to expand navigation menu to show past first 3 links -->
-          <div title="Expand Menu" id="navMenuToggle" title="Expand Menu">
-            <div>&nbsp;</div>
+          <!-- Button to close menu on mobile device -->
+          <i id="navMenuClose" title="Close Menu" class="material-icons">close</i>
+
+          <!-- Contracts to show first 3 links by default -->
+          <ul id="navMenu">
+            <li class="active">
+              <a>Page 1</a>
+            </li>
+            <li>
+              <a>Page 2</a>
+            </li>
+            <li>
+              <a>Page 3</a>
+            </li>
+            <li>
+              <a>Page 4</a>
+            </li>
+            <li>
+              <a>Page 5</a>
+            </li>
+
+            <!-- Button to expand navigation menu to show past first 3 links -->
+            <div id="navMenuToggle" title="Expand Menu">
+              <div>&nbsp;</div>
+            </div>
+          </ul>
+
+          <!-- Button to show settings menu on mobile devices -->
+          <div id="navMenuToggleView" class="material-icons">apps</div>
+
+          <!-- User profile menu button -->
+          <div id="userMenu">
           </div>
-        </ul>
-
-        <!-- User profile menu button -->
-        <div id="userMenu">
-        </div>
-      </div>
-
-      <!-- searchBarToggleStatus used to toggle minimized search bar -->
-      <input type="checkbox" class="inputToggle" id="searchBarToggleStatus">
-      <!-- Search bar -->
-      <div id="searchBar">
-        <label id="searchBarToggle" for="searchBarToggleStatus"></label>
-        <form>
-          <input type="text" name="query" id="searchInput" placeholder="Search for podcasts & subscriptions">
-          <label></label>
-        </form>
-      </div>
-    </header>
-
-    <!-- Main Section -->
-    <section id="main">
-
-      <!-- Side bar to the left of screen below header -->
-      <div id="sidebar">
-        <div id="sidebarHead">
-          <i class="material-icons">arrow_back</i> 
-        </div>
-        <!-- Top section of sidebar with two circular buttons -->
-        <div id="topSidebar">
-          <div id="dashboardLink" title="User Dashboard"></div>
-          <div id="notificationLink" title="Notifications"></div>
         </div>
 
-        <!-- Bottom section of sidebar with vertically stacked links -->
-        <ul id="menuSidebar">
-          <li>
-            <a>1</a>
-          </li>
-          <li class="active">
-            <a>2</a>
-          </li>
-        </ul>
-      </div>
+        <!-- searchBarToggleStatus used to toggle minimized search bar -->
+        <input type="checkbox" class="inputToggle" id="searchBarToggleStatus">
+        <!-- Search bar -->
+        <div id="searchBar">
+          <label id="searchBarToggle" for="searchBarToggleStatus"></label>
+          <form>
+            <input type="text" name="query" id="searchInput" placeholder="Search for podcasts & subscriptions">
+            <label></label>
+          </form>
+        </div>
+      </header>
 
-      <section id="content">
-        test
+      <!-- Main Section -->
+      <section id="main">
+
+        <!-- Side bar to the left of screen below header -->
+        <div id="sidebar">
+          <div id="sidebarHead">
+            <i class="material-icons">arrow_back</i> 
+          </div>
+          <!-- Top section of sidebar with two circular buttons -->
+          <div id="topSidebar">
+            <div id="dashboardLink" title="User Dashboard"></div>
+            <div id="notificationLink" title="Notifications"></div>
+          </div>
+
+          <!-- Bottom section of sidebar with vertically stacked links -->
+          <ul id="menuSidebar">
+            <li>
+              <a>1</a>
+            </li>
+            <li class="active">
+              <a>2</a>
+            </li>
+          </ul>
+        </div>
+
+        <section id="content">
+          test
+        </section>
       </section>
-    </section>
+
+      <!-- Footer sticks to bottom of page -->
+      <footer>
+        <span>
+          Copyright <i class="material-icons">copyright</i> 2018 Steven Shan
+        </span>
+        <div>
+          <a>Test 1</a>
+          <a>Test 2</a>
+          <a>Test 3</a>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

@@ -30,6 +30,9 @@ $(function(){ // on page load
             {
                 $("#settingsMenu #navMenu").addClass("expanded");
                 $("#searchBar").addClass("minimized");
+
+                // hide title
+                $("body").addClass("hideTitle");
             }
         });
 
@@ -39,9 +42,28 @@ $(function(){ // on page load
             {
                 $("#settingsMenu #navMenu").removeClass("expanded");
                 $("#searchBar").removeClass("minimized");
+
+                // unhide title
+                $("body").removeClass("hideTitle");
             }
         });
     }
+
+    /*
+    -------------------------------------------
+    Navigation menu maximization on mobile device
+    -------------------------------------------
+    */
+
+    // maximize navigation menu
+    $("#navMenuToggleView").click(function(){
+        $("#settingsMenu").addClass("maximized");
+    });
+
+    // minimize navigation menu
+    $("#navMenuClose").click(function(){
+        $("#settingsMenu").removeClass("maximized");
+    });
 
     /*
     -------------------------------------------
@@ -88,10 +110,10 @@ $(function(){ // on page load
         $("body").addClass("menuOpen");
     });
 
-    var minimizeSidebar = function() {
+    // close sidebar
+    $("#bgOverlay, #sidebarHead i").click(function(){
         $("body").removeClass("menuOpen");
-    };
-    $("#bgOverlay, #sidebarHead i").click(minimizeSidebar);
+    });
 
     /*
     -------------------------------------------

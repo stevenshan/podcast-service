@@ -5,8 +5,10 @@ styling for response design and resizing
 Responsive design activates in stages:
     1.) Widest - normal desktop screen width
     2.) Hide left sidebar menu and minimize search bar
-    4.) Minimize top menu
-    5.) Decreasing horizontal padding from 40px to 15px
+    4.) Minimize top menu and decrease side padding
+
+Note: some elements that are only shown in mobile are styled
+in template.css and only made visible here
 */
 
 /* Level 2 - hide sidebar */
@@ -21,6 +23,18 @@ Responsive design activates in stages:
     /*
     Title Section
     */
+
+    /* Hide title when menu expanded */
+    body.hideTitle header #titleSection #title {
+        display: none;
+    }
+    body.hideTitle header #titleSection {
+        width: 60px;
+    }
+
+    header #titleSection {
+        width: 250px;
+    }
 
     /* show sidebar toggle */
     header #titleSection #menuSidebarToggle {
@@ -40,7 +54,9 @@ Responsive design activates in stages:
     }
 
     /*
+    -------------------------------------------
     Sidebar
+    -------------------------------------------
     */
 
     /* whitish layer above screen when menu pops up */
@@ -77,6 +93,7 @@ Responsive design activates in stages:
         height: 85px;
         width: 100%;
         background-image: url("../imgs/mountains.jpeg");
+        background-color: #caf6f6;
         background-repeat: no-repeat;
         background-position: bottom center;
         background-size: cover;
@@ -112,10 +129,135 @@ Responsive design activates in stages:
         padding-left: 40px;
     }
 
+}
+
+/* Make title less wide */
+@media only screen and (max-width: 800px) {
+    header #titleSection {
+        width: 190px;
+    }
+
+    /* Hide subscript below title */
+    header #titleSection #title span {
+        display: none;
+    }
+}
+
+/* Level 3 - minimize top menu */
+@media only screen and (max-width: 750px) {
+
+    /*
+    ===========================================
+    Header
+    ===========================================
+    */
+
+    header {
+        padding: 30px 15px;
+    }
+
+    /* make sure title isn't hidden */
+    body.hideTitle header #titleSection #title {
+        display: inline-block;
+    }
+    body.hideTitle header #titleSection {
+        width: 190px;
+    }
+
+    /*
+    Settings Menu - hide menu
+    */
+
+    header #settingsMenu {
+        padding-left: 10px;
+    }
+
+    header #settingsMenu #navMenuToggleView {
+        display: block;
+    }
+
+    /* 
+    User Settings Menu
+    */
+
+    header #settingsMenu #userMenu {
+        margin-left: 10px;
+    }
+
+    /*
+    Search Bar
+    */
+    header #searchBar {
+        left: 15px !important;
+        right: 15px !important;
+    }
 
     /*
     -------------------------------------------
-    Content - main area in center of screen
+    Navigation Menu
     -------------------------------------------
     */
+
+    /* hide navigation menu by default */
+    header #settingsMenu #navMenu {
+        display: none;
+    }
+
+    header #settingsMenu #navMenu #navMenuToggle {
+        display: none !important;
+    }
+
+    /*
+    Show navigation menu
+    */
+
+    #settingsMenu.maximized  #navMenu {
+        display: table;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+    }
+
+    #settingsMenu.maximized #navMenu li {
+        position: relative !important;
+        display: table-row !important;
+        height: auto !important;
+        text-align: center;
+    }
+
+    #settingsMenu.maximized #navMenu li a {
+        display: table-cell;
+        height: auto !important;
+        vertical-align: middle;
+        font-size: 25px;
+    }
+
+    #settingsMenu.maximized #navMenu li a:before {
+        display: none !important;
+    }
+
+    /* make button to close menu visible */
+    header #settingsMenu.maximized #navMenuClose {
+        display: block;
+        z-index: 1001;
+    }
+
+    /*
+    ===========================================
+    Main - everything below the header
+    ===========================================
+    */
+
+    #main {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
 }
+
+
+
+
