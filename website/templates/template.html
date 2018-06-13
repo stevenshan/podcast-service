@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 
     <title>Podcasts</title>
-
+    {% load static %}
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> -->
-    <link href="css/fonts/lato.css" rel="stylesheet">
-    <link href="css/fonts/material-fonts.css" rel="stylesheet">
+    <link href="{% static 'website/css/fonts/lato.css' %}" rel="stylesheet">
+    <link href="{% static 'website/css/fonts/material-fonts.css' %}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/template.css" rel="stylesheet" type="text/css">
-    <link href="css/template.mobile.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'website/css/template.css' %}" rel="stylesheet">
+    <link href="{% static 'website/css/template.mobile.css' %}" rel="stylesheet">
 
     <!-- Javascript Libraries -->
-    <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="{% static 'website/js/jquery-3.3.1.min.js' %}" type="text/javascript"></script>
 
-    <script src="js/template.js" type="text/javascript"></script>
+    <script src="{% static 'website/js/template.js' %}" type="text/javascript"></script>
   </head>
   <body>
     <!-- whitish layer above screen for menu -->
