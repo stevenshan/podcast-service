@@ -23,7 +23,7 @@ Results labels - off shade white bar above search results
 -------------------------------------------
 */
 
-#content #searchResultHeader {
+#searchResultHeader {
     height: 55px;
     line-height: 55px;
     background: #5c8cd1;
@@ -32,16 +32,22 @@ Results labels - off shade white bar above search results
     position: relative;
 }
 
-#content #searchResultHeader #podcastLabel {
+#searchResultHeader #podcastLabel {
     position: absolute;
     left: 90px; /* width of thumbnail including padding */
 }
 
-#content #searchResultHeader #statsLabel {
+#searchResultHeader #statsLabel {
     position: absolute;
     right: 0px;
     width: 120px;
     text-align: center;
+}
+
+#content {
+    border-top: 0px;
+    /* no top border radius because searchResultHeader is above it */
+    border-radius: 0px 0px 2px 2px;
 }
 
 /*

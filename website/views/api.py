@@ -85,7 +85,7 @@ class DummyDB:
 # gets set by __init__.py to actual database
 nameDB = DummyDB()
 
-# simple interface to serve as wrapper for nameDB
+# interface to serve as wrapper for nameDB
 class nameMap:
     # retrieve name given mygpo_link
     @staticmethod

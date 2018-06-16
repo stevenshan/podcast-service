@@ -594,6 +594,7 @@ Content - the actually important stuff
 #content {
     background: white;
     border-radius: 2px;
+    border: 1px solid #d1d1d1;
 }
 
 /*

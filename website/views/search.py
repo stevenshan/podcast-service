@@ -40,7 +40,6 @@ class Search(TemplateView):
                     podcast["url"]
                 )
             except Exception as e:
-                print(e)
                 name = ""
             podcast["idName"] = name
 

@@ -12,18 +12,21 @@
 </script>
 {% endblock %}
 
+{% block title %}
+Podcast Search - {{ query }}
+{% endblock %}
+
 {% block content %}
 <div id="searchResultMessage">
 Search results for <strong>{{ query }}</strong>:
 </div>
+<div id="searchResultHeader">
+    <div id="podcastLabel">Podcast</div>
+    <div id="statsLabel">
+        <span id="statsLabelSubscribers">Subscribers</span>
+    </div>
+</div> 
 <section id="content">
-    <div id="searchResultHeader">
-        <div id="podcastLabel">Podcast</div>
-        <div id="statsLabel">
-            <span id="statsLabelSubscribers">Subscribers</span>
-        </div>
-    </div> 
-    {{ test }}
     {% if results|length > 0 %}
         {% for result in results %}
             {% if forloop.counter|divisibleby:2 %}
