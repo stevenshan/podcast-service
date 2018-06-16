@@ -71,6 +71,14 @@ $(function(){ // on page load
     -------------------------------------------
     */
 
+    function getDefaultSearchVal(def = "")
+    {
+        return typeof defaultSearchValue === "undefined" ?
+                def : defaultSearchValue;
+    }
+    $("header #searchInput").attr("placeholder", 
+        getDefaultSearchVal($("header #searchInput").val()));
+
     var focusOutEvent = function() {
         $("header #searchBar").removeClass("focused");
         $("#searchBarToggleStatus").prop("checked", false);
@@ -79,10 +87,17 @@ $(function(){ // on page load
     $("header #searchInput")
         .focus(function(){ // on focus event
             $("header #searchBar").addClass("focused");
+
+            if ($(this).val() == "")
+            {
+                $(this).val(getDefaultSearchVal());
+            }
         })
         .focusout(function(){ // when focus leaves
-            if ($(this).val() == "") // if search bar is empty
-            {
+            if ( // if search bar is considered empty
+                $(this).val() == getDefaultSearchVal() ||
+                $(this).val() == ""
+            ) {
                 window.setTimeout(function() {
                     focusOutEvent();
                 }, 100);
@@ -96,6 +111,7 @@ $(function(){ // on page load
             focusOutEvent();
         }
         else {
+            input.val(getDefaultSearchVal());
             input.focus();
         }
     });

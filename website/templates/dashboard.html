@@ -1,0 +1,7 @@
+test dashboard
+
+{% if user.is_authenticated %}
+    {{ user.username }}
+{% else %}
+    Not logged in.
+{% endif %}

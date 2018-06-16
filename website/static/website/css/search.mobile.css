@@ -1,0 +1,35 @@
+/*
+Stylesheet that goes along with search.css but contains 
+styling for response design and resizing
+*/
+
+@media only screen and (max-width: 750px) {
+
+    /*
+    adjusts results labels 
+    */
+
+    #content #searchResultHeader #podcastLabel {
+        left: 80px;
+    }
+
+    /* 
+    make search results smaller 
+    */
+
+    .searchResult .thumbnail {
+        width: 50px;
+        height: 50px;
+    }
+
+    .searchResult .stats {
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .searchResult .metadata > * {
+        padding: 2px 0px 3px 0px;
+    }
+
+}
+

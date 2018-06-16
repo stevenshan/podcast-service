@@ -81,6 +81,7 @@ in template.css and only made visible here
         height: 100%;
         width: 350px;
         z-index: 1000;
+        overflow-y: auto;
 
         /* shadow to right */
         -webkit-box-shadow: 3px 3px 70px 6px #c4c4c4;

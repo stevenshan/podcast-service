@@ -1,0 +1,59 @@
+{% extends 'template.html' %}
+
+{# Load custom filters #}
+{% load search %}
+
+{% block stylesheets %}
+{% load static %}
+<link href="{% static 'website/css/search.css' %}" rel="stylesheet">
+<link href="{% static 'website/css/search.mobile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    var defaultSearchValue = "{{ query }}";
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="searchResultMessage">
+Search results for <strong>{{ query }}</strong>:
+</div>
+<section id="content">
+    <div id="searchResultHeader">
+        <div id="podcastLabel">Podcast</div>
+        <div id="statsLabel">
+            <span id="statsLabelSubscribers">Subscribers</span>
+        </div>
+    </div> 
+    {% if results|length > 0 %}
+        {% for result in results %}
+            {% if forloop.counter|divisibleby:2 %}
+                <div class="searchResult odd">
+            {% else %}
+                <div class="searchResult">
+            {% endif %}
+                {# left side of search result #}
+                <img src="{{ result.scaled_logo_url }}" class="thumbnail" 
+                        onerror="this.src='{% static 'website/imgs/thumbnail.jpeg' %}'">
+
+                {# right side of search result - show popularity of result #}
+                <div class="stats">
+                    <span class="subscribers">
+                        {{ result.subscribers }}
+                    </span>
+                </div>
+
+                {# center of search result - basic data like name and desc #}
+                <div class="metadata">
+                    <div class="title">{{ result.title }}</div>
+                    <div class="description">{{ result.description }}</div>
+                </div>
+            </div>
+
+        {% endfor %}
+    {% else %}
+    {% endif %}
+
+</section>
+{% endblock %}

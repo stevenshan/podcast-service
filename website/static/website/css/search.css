@@ -1,0 +1,109 @@
+/*
+Stylesheet for search results page
+*/
+
+/*
+===========================================
+Search result list header
+===========================================
+*/
+
+#searchResultMessage {
+    color: #ffffff;
+    font-size: 17px;
+    height: 35px;
+}
+
+/*
+-------------------------------------------
+Results labels - off shade white bar above search results
+-------------------------------------------
+*/
+
+#content #searchResultHeader {
+    height: 55px;
+    line-height: 55px;
+    background: #5c8cd1;
+    color: #ffffff;
+    border-radius: 2px 2px 0px 0px; /* round top corners */
+    position: relative;
+}
+
+#content #searchResultHeader #podcastLabel {
+    position: absolute;
+    left: 90px; /* width of thumbnail including padding */
+}
+
+#content #searchResultHeader #statsLabel {
+    position: absolute;
+    right: 0px;
+    width: 120px;
+    text-align: center;
+}
+
+/*
+===========================================
+Search results list
+===========================================
+*/
+
+.searchResult {
+    padding: 15px 0px; 
+    color: #2d2d2d; 
+}
+
+.searchResult.odd {
+    background: #f5f5f5;
+}
+
+.searchResult:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.searchResult .thumbnail {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    float: left;
+    margin: 0px 15px;
+}
+
+.searchResult .stats {
+    float: right;
+    height: 60px;
+    line-height: 60px;
+    width: 120px;
+    font-size: 0px;
+}
+
+.searchResult .stats > span {
+    display: inline-block;
+    font-size: 15px;
+    text-align: center;
+}
+
+.searchResult .stats .subscribers {
+    width: 100%;
+}
+
+.searchResult .metadata {
+    display: block;
+    padding-right: 20px;
+}
+
+.searchResult .metadata > * {
+    padding: 5px 0px;
+}
+
+.searchResult .metadata .title,
+.searchResult .metadata .description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.searchResult .metadata .description {
+    color: #afafaf
+}
