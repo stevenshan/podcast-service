@@ -12,6 +12,9 @@ Search result list header
     color: #ffffff;
     font-size: 17px;
     height: 35px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /*
@@ -106,4 +109,65 @@ Search results list
 
 .searchResult .metadata .description {
     color: #afafaf
+}
+
+.searchResult .metadata .title > a:hover {
+    text-decoration: underline;
+}
+
+/*
+===========================================
+Default page when no search results
+===========================================
+*/
+
+#noResultMessage {
+    padding: 25px;
+}
+
+/* Your search did not return any results. */
+#noResultMessage > span {
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Suggestions: */
+#noResultMessage > div > span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#noResultMessage ul > li {
+    display: block;
+    padding: 5px 0px;
+}
+
+#noResultMessage ul > li:before {
+    content: "fiber_manual_record";
+    display: block;
+    margin: 0px 5px;
+
+    /* material design icon */
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 10px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
 }

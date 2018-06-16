@@ -3,6 +3,7 @@ from base import *
 # search page for podcasts
 class Search(TemplateView):
     def get(self, request, **kwargs):
+        
         # anonymous function to simplify syntax of getting GET data
         get = lambda x: request.GET.get(x)
 
@@ -27,6 +28,18 @@ class Search(TemplateView):
             content = json.loads(search)
         except Exception as e:
             content = []
+
+        # retrieve podcast names
+        for podcast in content:
+            try:
+                name = api.nameMap.checkout(
+                    podcast["mygpo_link"],
+                    podcast["url"]
+                )
+            except Exception as e:
+                print(e)
+                name = ""
+            podcast["idName"] = name
 
         variables = ({
             "query": query,

@@ -1,8 +1,5 @@
 {% extends 'template.html' %}
 
-{# Load custom filters #}
-{% load search %}
-
 {% block stylesheets %}
 {% load static %}
 <link href="{% static 'website/css/search.css' %}" rel="stylesheet">
@@ -26,6 +23,7 @@ Search results for <strong>{{ query }}</strong>:
             <span id="statsLabelSubscribers">Subscribers</span>
         </div>
     </div> 
+    {{ test }}
     {% if results|length > 0 %}
         {% for result in results %}
             {% if forloop.counter|divisibleby:2 %}
@@ -46,13 +44,29 @@ Search results for <strong>{{ query }}</strong>:
 
                 {# center of search result - basic data like name and desc #}
                 <div class="metadata">
-                    <div class="title">{{ result.title }}</div>
+                    <div class="title">
+                        <a href="/podcast/{{ result.idName }}">
+                            {{ result.title }}
+                        </a>
+                    </div>
                     <div class="description">{{ result.description }}</div>
                 </div>
             </div>
-
         {% endfor %}
     {% else %}
+        <div id="noResultMessage">
+            <span>Your search did not return any results.</span>
+            <div>
+                <span>Suggestions:</span>
+                <ul>
+                    <li>Make sure that all words are spelled correctly</li>
+                    <li>Try different keywords</li>
+                    <li>Try more general keywords</li>
+                    <li>Try fewer keywords</li>
+                    <li>Explore podcasts by tag</li>
+                </ul>
+            </div>
+        </div>
     {% endif %}
 
 </section>

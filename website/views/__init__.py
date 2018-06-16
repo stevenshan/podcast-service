@@ -11,3 +11,5 @@ class Dashboard(TemplateView):
     def get(self, request, **kwargs):
         return render(request, 'dashboard.html', context=None)
 
+# initialize PickleDB for mapping podcast names to url
+api.nameDB = api.pickledb.load("podcastMapping.db", False)
