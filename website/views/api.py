@@ -14,19 +14,35 @@ podcastPat = re.compile("\/podcast\/([^\/]+)$")
 # Methods for interacting with gPodder API
 ###########################################################
 
+# uri host for api
 HOST = "https://gpodder.net"
 
 # backups for testing without internet
 class OfflineEndpoints:
+    # Podcast Search Directory API
     @staticmethod
     def search(query, headers):
         if query == "empty" or query == "none":
             return ""
-        file = open("website/views/search-example.json").read()
+        file = open("website/views/examples/search-example.json").read()
+        return file
+
+    @staticmethod
+    def podcast(url, headers):
+        file = open("website/views/examples/podcast-data-example.json").read()
         return file
 
 # actual methods for connecting to api endpoints
 class OnlineEndpoints(OfflineEndpoints):
+    # shared method for getting content with http request
+    @staticmethod
+    def processRequest(request):
+        if request.status_code == 200:
+            return request.content
+        else:
+            return None
+
+    # Podcast Search Directory API
     @staticmethod
     def search(query, headers):
         request = requests.get(
@@ -35,10 +51,18 @@ class OnlineEndpoints(OfflineEndpoints):
             headers=headers
         )
 
-        if request.status_code == 200:
-            return request.content
-        else:
-            return None
+        return OnlineEndpoints.processRequest(request)
+
+    # Retrieve Podcast Data Directory API    
+    @staticmethod
+    def podcast(url, headers):
+        request = requests.get(
+            HOST + "/api/2/data/podcast.json",
+            params={"url": url},
+            headers=headers
+        )
+
+        return OnlineEndpoints.processRequest(request)
 
 # change between OfflineEndpoints and OnlineEndpoints
 endpoints = OfflineEndpoints 

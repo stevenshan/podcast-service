@@ -1,0 +1,1 @@
+# module containing custom filters for Django templates

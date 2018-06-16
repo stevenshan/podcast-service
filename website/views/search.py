@@ -1,9 +1,12 @@
 from base import *
 
+# View for search page - /search
+
 # search page for podcasts
 class Search(TemplateView):
+    # return search page after making query to API
     def get(self, request, **kwargs):
-        
+
         # anonymous function to simplify syntax of getting GET data
         get = lambda x: request.GET.get(x)
 
@@ -21,11 +24,11 @@ class Search(TemplateView):
         })
 
         # make api request for search
-        search = api.endpoints.search(query, headers)
+        searchRequest = api.endpoints.search(query, headers)
 
         # parse search results to json
         try:
-            content = json.loads(search)
+            content = json.loads(searchRequest)
         except Exception as e:
             content = []
 
