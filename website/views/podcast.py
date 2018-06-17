@@ -54,7 +54,8 @@ class Podcast(TemplateView):
         variables = ({
             "podcast": content,
             "episodeCount": episodeCount,
-            "firstGroup": firstGroup
+            "firstGroup": firstGroup,
+            "podcastName": podcastName
         })
 
         return render(request, 'podcast.html', context=variables)

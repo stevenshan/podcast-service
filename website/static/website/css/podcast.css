@@ -264,3 +264,19 @@ Episode Summary List Section
     width: 100%;
     background: #ffffff;
 }
+
+/*
+Button to go to full episodes page
+*/
+
+#moreEpisodesButton {
+    padding: 15px; 
+    text-align: center;
+    margin-top: 20px;
+    background: #f1c853;
+    display: block;
+    margin-left: 30px;
+    width: 150px;
+    border-radius: 2px;
+    color: #ffffff;
+}

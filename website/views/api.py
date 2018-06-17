@@ -162,8 +162,8 @@ class OnlineEndpoints(OfflineEndpoints):
         return OnlineEndpoints.processRequest(request)
 
 # change between OnlineEndpoints and OfflineEndpoints for testing
-# endpoints = OfflineEndpoints 
-endpoints = OnlineEndpoints
+endpoints = OfflineEndpoints 
+# endpoints = OnlineEndpoints
 
 ###########################################################
 # Database methods - maps podcast name to url

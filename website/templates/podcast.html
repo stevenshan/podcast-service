@@ -78,6 +78,9 @@
                     {{ episode.description }}
                 </p>
             </div>
+            {% if forloop.counter == firstGroup|length and episodeCount > firstGroup|length %}
+            <a href="{{ podcastName }}/episodes" id="moreEpisodesButton">More Episodes</a>
+            {% endif %}
             {% endfor %}
             {% endif %}
         </section>
