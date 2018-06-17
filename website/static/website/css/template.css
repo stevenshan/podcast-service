@@ -576,7 +576,10 @@ Bottom Sidebar - menu on left with vertically stacked links
 
 #main #sidebar #menuSidebar li a {
     display: block;
-    padding: 15px 0px 15px 75px;
+    padding: 15px 15px 15px 40px;
+    font-weight: bolder;
+    font-size: 15px;
+    color: #4f4f4f;
 }
 
 /* when link is hovered or already active */

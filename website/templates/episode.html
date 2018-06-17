@@ -1,0 +1,82 @@
+{# Page for showing full list of episodes from podcast #}
+
+{% extends 'template.html' %}
+
+{% block stylesheets %}
+{% load static %}
+<link href="{% static 'website/css/podcast.css' %}" rel="stylesheet">
+<link href="{% static 'website/css/podcast.mobile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{{ podcast.title }}
+{% endblock %}
+
+{% block sidebar %}
+<li>
+    <a href="/podcast/{{ podcastName }}">Podcast Overview</a>
+</li>
+<li>
+    <a href="/podcast/{{ podcastName }}/episodes">Episodes</a>
+</li>
+{% block episodesOptions %}
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div id="podcastTitle">
+    {{ podcast.title }}
+</div>
+
+<section id="content">
+    <section id="podcastMeta">
+        <div id="thumbnailContainer">
+            <img src="{{ podcast.logo_url }}" id="thumbnail"
+                    onerror="this.src='{% static 'website/imgs/thumbnail.jpeg' %}'">
+            <div id="subscribers">
+                {{ podcast.subscribers }}
+            </div>
+        </div>
+        <div id="linksSection">
+            <label id="linksHeader">
+                Links
+            </label>
+            <div id="linkWebsite">
+                <a href="{{ podcast.website }}">Website</a>
+            </div>
+            <div id="linkURL">
+                <a href="{{ podcast.url }}">RSS Feed</a>
+            </div>
+            <div id="linkGPOLink">
+                <a href="{{ podcast.mygpo_link }}">gPodder Page</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="podcastContent">
+        {% block contentSection %}
+        {% with episode=episodes.0 %}
+        <section class="contentSection" id="podcastEpisode">
+            <div class="contentTitle">
+                {{ episode.title }}
+            </div>
+            <div class="contentTitleSub">
+                {{ episode.released }}
+            </div>
+            <p>
+                {{ episode.description }}
+            </p>
+        </section>
+        {% endwith %}
+        {% endblock %}
+
+        {% block episodeList %}
+        {% endblock %}
+    </div>
+
+    <!-- element just to clear float -->
+    <div id="podcastClear"></div>
+</section>
+
+{% endblock %}

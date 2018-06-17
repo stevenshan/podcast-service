@@ -68,13 +68,18 @@ def parseFeedXML(xml):
                     "released": toDate(pubDate[0].text)
                 })
                 result.append(episodeDict)
-    except Exception as e:
-        print(e)
+    except:
         pass
 
     # sort urls by publication date
     key = lambda x: x["released"] # get publication date from tuple
     result.sort(key=key,reverse=True)
+
+    # enumerate episodes
+    counter = 0
+    for episode in result:
+        episode["enumeration"] = len(result) - counter
+        counter += 1
 
     return result
 

@@ -185,9 +185,16 @@ Summary section - right side with description, episodes
 #content #podcastContent .contentSection > .contentTitle {
     color: #000000;
     font-size: 20px;
-    height: 40px;
-    line-height: 40px;
-    margin-bottom: 10px;
+    min-height: 30px;
+    line-height: 30px;
+    margin-bottom: 20px;
+    padding-left: 28px; /* 20 for width of icon + 8 for margin */
+    position: relative;
+}
+
+#content #podcastContent .contentSection > .contentTitleSub {
+    padding-left: 30px;
+    margin-bottom: 20px;
 }
 
 /* for subscript like total count of episodes */
@@ -197,9 +204,9 @@ Summary section - right side with description, episodes
 
 #content #podcastContent .contentSection > .contentTitle:before {
     display: block;
-    float: left;
-    margin-top: 10px;
-    margin-right: 8px;
+    position: absolute;
+    margin-top: 5px;
+    left: 0px;
     content: "description";
 
     /* material design properties at top */
@@ -211,6 +218,10 @@ Summary section - right side with description, episodes
 
 #content #podcastContent #podcastEpisodes > .contentTitle:before {
     content: "folder";
+}
+
+#content #podcastContent #podcastEpisode > .contentTitle:before {
+    content: "label";
 }
 
 #content #podcastContent .contentSection > p,
@@ -276,7 +287,7 @@ Button to go to full episodes page
     background: #f1c853;
     display: block;
     margin-left: 30px;
-    width: 150px;
+    width: 200px;
     border-radius: 2px;
     color: #ffffff;
 }
@@ -284,3 +295,18 @@ Button to go to full episodes page
 #moreEpisodesButton:hover {
     background: #e8be47;
 }
+
+/*
+===========================================
+View Specific Styles
+===========================================
+*/
+
+/*
+Episode Detail Page
+*/
+
+#content #podcastContent #podcastEpisode > .contentTitle {
+    margin-bottom: 10px;
+}
+

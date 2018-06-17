@@ -2,6 +2,7 @@
 
 {# subclass episodes in order to add description, fewer episodes are #}
 {# displayed through the view, which lowers the episodes in the context #}
+
 {% extends 'episodes.html' %}
 
 {% block contentSection %}
@@ -11,4 +12,8 @@
         {{ podcast.description }}
     </p>
 </section>
+{% endblock %}
+
+{# only used in episodes.html template #}
+{% block episodesOptions %}
 {% endblock %}

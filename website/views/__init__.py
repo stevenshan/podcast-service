@@ -7,10 +7,10 @@ from homepage import HomePage
 # search page - /search
 from search import Search
 
-# show details for podcast - /podcast
-from podcast import Podcast
-# show full list of podcast episodes - /podcast/*/episodes
-from podcast import Episodes 
+# Podcast - show details for podcast - /podcast
+# Episodes - show full list of podcast episodes - /podcast/*/episodes
+# Episode - show details of specific episode
+from podcast import Podcast, Episodes, Episode
 
 # User dashboard as front page for logged in users
 from base import *
