@@ -213,7 +213,8 @@ Summary section - right side with description, episodes
     content: "folder";
 }
 
-#content #podcastContent .contentSection > p {
+#content #podcastContent .contentSection > p,
+#content #podcastContent .contentSection .episodeSummary {
     padding: 0px;
     padding-left: 30px;
     margin: 0px;
@@ -224,4 +225,42 @@ Summary section - right side with description, episodes
     margin: 0px;
     padding-left: 30px;
     font-weight: normal;
+}
+
+/*
+-------------------------------------------
+Episode Summary List Section
+-------------------------------------------
+*/
+
+#content #podcastContent .contentSection .episodeSummary {
+    margin-top: 15px;
+}
+
+.episodeSummary .episodeTitle {
+    font-weight: bolder;
+    font-size: 16px;
+}
+
+.episodeSummary .episodeTitle a:hover {
+    text-decoration: underline;
+}
+
+.episodeSummary > p {
+    margin: 5px 0px 10px 0px;
+    line-height: 23px;
+    max-height: 69px;
+    text-overflow: ellipsis;
+    position: relative;
+    overflow: hidden;
+}
+
+.episodeSummary > p:after {
+    display: block;
+    content: "...";
+    position: absolute;
+    top: 46px;
+    left: 0px;
+    width: 100%;
+    background: #ffffff;
 }

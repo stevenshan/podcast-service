@@ -1,7 +1,5 @@
 from base import *
 
-import re # regex for getting parts of url
-
 def readURL(url):
     match = api.podcastPat.findall(url)
     if match != None and len(match) == 1:
@@ -30,6 +28,14 @@ class Podcast(TemplateView):
         # get url of podcast
         url = api.nameMap.lookup(podcastName)
 
+        # if can't find url of podcast using dictionary
+        if url == None:
+            # try reverse lookup on gpodder
+            url = api.nameMap.reverseLookup(podcastName, headers)
+
+        if url == None:
+            return redirect("/search?q=" + podcastName)
+
         # make api request to get podcast details
         podcastRequest = api.endpoints.podcast(url, headers)
 
@@ -43,12 +49,12 @@ class Podcast(TemplateView):
         episodeURLs = api.endpoints.feedList(url, headers)
         episodeCount = len(episodeURLs)
 
-        # get details of first 5
-
+        firstGroup = episodeURLs[:5]
 
         variables = ({
             "podcast": content,
-            "episodeCount": episodeCount
+            "episodeCount": episodeCount,
+            "firstGroup": firstGroup
         })
 
         return render(request, 'podcast.html', context=variables)

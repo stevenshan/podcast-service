@@ -1,15 +1,20 @@
 # contains information for connecting to gPodder API
 
+from dateutil.parser import parse as parseDate # convert date string to object
+from datetime import datetime
 import requests # for making requests to api endpoints
 
 # used for database mapping podcast name to url
 import pickledb
 
 import re # regular expressions
-import xml.etree.ElementTree as xmlET # XML parsing for episode feed
+from lxml import etree # XML parsing for episode feed
 
 # regex pattern to get name of podcast from url
 podcastPat = re.compile("\/podcast\/([^\/]+)$")
+
+# regex pattern to get podcast feed url from gpodder html code
+gPodderReverse = re.compile("<a href=\"([^\"]+)\" title=\"Feed\">")
 
 ###########################################################
 # General Helpers
@@ -22,26 +27,54 @@ def safeRequest(url, params = {}, headers = {}):
     except:
         return None
 
-# converts XML feed from podcast url to list of episode urls
-def parseFeedXML(xml):
-    urls = []
+def toDate(dateString):
     try:
-        tree = xmlET.ElementTree(xmlET.fromstring(xml))
-        root = tree.getroot()
+        return parseDate(dateString)
+    except:
+        # return epoch on failure
+        return datetime.fromtimestamp(0)
+
+# converts XML feed from podcast url to list of episodes
+def parseFeedXML(xml):
+    result = []
+    try:
+        tree = etree.fromstring(xml)
 
         # all episodes are in "item" tag
         # url of each episode is in "enclosure" tag inside 
         # the url attribute
 
         # find all urls in XML
-        for episode in tree.iter(tag="item"):
+        items = tree.iter(tag="item")
+        for episode in items:
             enclosures = episode.findall("enclosure")
-            if len(enclosures) == 1 and "url" in enclosures[0].attrib:
-                urls.append(enclosures[0].attrib["url"])
-    except:
+            pubDate = episode.findall("pubDate")
+            title = episode.findall("title")
+            description = (episode.findall("description") +
+                    episode.findall("itunes:summary", tree.nsmap))
+            if (
+                    len(enclosures) == 1 and 
+                    len(pubDate) == 1 and
+                    len(title) == 1 and
+                    len(description) >= 1 and
+                    "url" in enclosures[0].attrib
+            ):
+                episodeDict = ({
+                    "url": enclosures[0].attrib["url"], 
+                    "title": title[0].text,
+                    "description": description[0].text,
+                    "released": toDate(pubDate[0].text)
+                })
+                result.append(episodeDict)
+    except Exception as e:
+        print(e)
         pass
 
-    return urls
+    # sort urls by publication date
+    key = lambda x: x["released"] # get publication date from tuple
+    result.sort(key=key,reverse=True)
+
+    return result
 
 ###########################################################
 # Methods for interacting with gPodder API
@@ -66,10 +99,18 @@ class OfflineEndpoints:
         file = open("website/views/examples/podcast-data-example.json").read()
         return file
 
+    # Gets list of Episode URLs from podcast url
     @staticmethod
-    def feedList(url):
+    def feedList(url, headers):
         file = open("website/views/examples/feed-xml-example.xml").read()
         return parseFeedXML(file)
+
+    # Retrieve Episode Data Directory API
+    @staticmethod 
+    def episode(url, episode_url, headers):
+        file = open("website/views/examples/episode-data-example.json").read()
+        return file
+
 
 # actual methods for connecting to api endpoints
 class OnlineEndpoints(OfflineEndpoints):
@@ -117,6 +158,7 @@ class OnlineEndpoints(OfflineEndpoints):
             params={"podcast": url, "url": episode_url},
             headers=headers
         )
+        print(request, url, episode_url)
         return OnlineEndpoints.processRequest(request)
 
 # change between OnlineEndpoints and OfflineEndpoints for testing
@@ -174,3 +216,27 @@ class nameMap:
             nameMap.add(gPodderName, url)
         return gPodderName
         
+    # go to gPodder website to try to get podcast feed url
+    @staticmethod
+    def reverseLookup(gPodderName, headers):
+        gPodderURL = HOST + "/podcast/" + gPodderName
+        request = safeRequest(gPodderURL, headers=headers)
+        content = OnlineEndpoints.processRequest(request)
+
+        if content == None:
+            return None
+
+        matches = gPodderReverse.findall(content)
+
+        if len(matches) != 1:
+            return None
+        else:
+            match = matches[0]
+
+        if endpoints.podcast(match, headers) != None:
+            nameMap.checkout(gPodderURL, match)
+            return match
+
+        return None
+
+

@@ -24,7 +24,7 @@
             <img src="{{ podcast.logo_url }}" id="thumbnail"
                     onerror="this.src='{% static 'website/imgs/thumbnail.jpeg' %}'">
             <div id="subscribers">
-                10
+                {{ podcast.subscribers }}
             </div>
         </div>
         <div id="linksSection">
@@ -57,9 +57,29 @@
                     ({{ episodeCount }} total)
                 </small>
             </div>
+            {% if episodeCount == 0 %}
             <h1>No Episodes Found</h1>
-            <p>
-            </p>
+            {% else %}
+            {% for episode in firstGroup %}
+            {% if forloop.counter0 == 0 %}
+            <div class="episodeSummary" style="margin-top: 0px">
+            {% else %}
+            <div class="episodeSummary">
+            {% endif %}
+                <div class="episodeTitle">
+                    <a>
+                        {{ episode.title }}
+                    </a>
+                </div>
+                <div class="episodeRelease">
+                    <small>{{ episode.released }}</small>
+                </div>
+                <p>
+                    {{ episode.description }}
+                </p>
+            </div>
+            {% endfor %}
+            {% endif %}
         </section>
     </div>
 
