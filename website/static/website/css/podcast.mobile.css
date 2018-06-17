@@ -1,0 +1,84 @@
+/*
+Stylesheet that goes along with podcast.css but contains 
+styling for response design and resizing
+
+
+*/
+
+@media only screen and (max-width: 800px) {
+
+    /*
+    ===========================================
+    Metadata section - left side with thumbnail, subscribers
+    ===========================================
+    */
+
+    #content #podcastMeta {
+        width: 100%;
+        height: auto;
+        position: relative;
+        float: none;
+        padding: 0px;
+    }
+
+    /*
+    -------------------------------------------
+    Thumbnail Container - thumbnail and # of subscribers
+    -------------------------------------------
+    */
+
+    #content #podcastMeta #thumbnailContainer {
+        text-align: center;
+        background: #363636;
+        padding: 25px;
+    }
+
+    #content #podcastMeta #thumbnailContainer #subscribers {
+        background: none;
+        padding-bottom: 0px;
+    }
+
+    /*
+    ---------------------------------------------
+    Separate links section from thumbnail and subscribers
+    ---------------------------------------------
+    */
+
+    #content #podcastMeta #linksSection {
+        margin-top: 0px;
+        padding: 20px;
+        padding-bottom: 0px;
+        background: #ffffff;
+    }
+
+    #content #podcastMeta #linksSection #linksHeader {
+        height: 40px;
+        line-height: 40px;
+        margin-bottom: 0px;
+        position: relative;
+    }
+
+    #content #podcastMeta #linksSection #linksHeader:before {
+        display: block;
+        float: left;
+        margin-top: 10px;
+        margin-right: 8px;
+    }
+
+    #content #podcastMeta #linksSection > div {
+        margin-left: 28px; /* indent past title */
+    }
+
+    /*
+    ===========================================
+    Summary section - right side with description, episodes
+    ===========================================
+    */
+
+    #content #podcastContent {
+        margin-left: 0px;
+        padding: 20px;
+        overflow: hidden;
+    }
+}
+

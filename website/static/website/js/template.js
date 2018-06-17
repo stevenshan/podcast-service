@@ -77,7 +77,7 @@ $(function(){ // on page load
                 def : defaultSearchValue;
     }
     $("header #searchInput").attr("placeholder", 
-        getDefaultSearchVal($("header #searchInput").val()));
+        getDefaultSearchVal($("header #searchInput").attr("placeholder")));
 
     var focusOutEvent = function() {
         $("header #searchBar").removeClass("focused");
