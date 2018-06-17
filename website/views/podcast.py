@@ -14,6 +14,10 @@ def readURL(url):
 
 # podcast details page - only shows first 5 episodes
 class Episodes(TemplateView):
+    template = "episodes.html"
+
+    # get podcast data from gpodder endpoint and then go
+    # to feed of podcast and retrieve episodes list
     def retrieveData(self, request):
         # get user-agent
         userAgent = request.META['HTTP_USER_AGENT']
@@ -47,25 +51,35 @@ class Episodes(TemplateView):
             content = []
 
         # get urls of episodes so we can get episode details
-        episodeURLs = api.endpoints.feedList(url, headers)
-        episodeCount = len(episodeURLs)
+        episodeData = api.endpoints.feedList(url, headers)
+        episodeCount = len(episodeData)
 
-        firstGroup = episodeURLs[:5]
+        episodes = self.episodeFilter(episodeData)
 
         variables = ({
             "podcast": content,
             "episodeCount": episodeCount,
-            "episodes": firstGroup,
+            "episodes": episodes,
             "podcastName": podcastName
         })
 
         return variables
 
-    # return page after making request for podcast details from API
+    # decides which episodes to return
+    # by default return all of them for full episode list
+    def episodeFilter(self, episodes):
+        return episodes
+
+    # return page after making request for podcast details 
+    # and list of episodes from api and rss feed
     def get(self, request, **kwargs):
         variables = self.retrieveData(request)
-        return render(request, 'podcast.html', context=variables)
+        return render(request, self.template, context=variables)
 
 # full episode list page
 class Podcast(Episodes):
-    pass
+    template = "podcast.html"
+
+    # override to only return first 5 to avoid clutter
+    def episodeFilter(self, episodes):
+        return episodes[:5]

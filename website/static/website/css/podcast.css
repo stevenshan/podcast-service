@@ -280,3 +280,7 @@ Button to go to full episodes page
     border-radius: 2px;
     color: #ffffff;
 }
+
+#moreEpisodesButton:hover {
+    background: #e8be47;
+}
