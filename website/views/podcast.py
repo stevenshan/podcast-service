@@ -1,19 +1,20 @@
 from base import *
 
 def readURL(url):
-    match = api.podcastPat.findall(url)
-    if match != None and len(match) == 1:
-        return match[0]
-    else:
+    matches = api.podcastPatWhole.findall(url)
+    if matches == None or len(matches) != 1:
         return None
+
+    match = api.podcastPatBreak.findall(matches[0])
+    if len(match) != 0:
+        return match
+    return None
 
 # View for podcast details page - /podcast
 
-# podcast details page
-class Podcast(TemplateView):
-    # return page after making request for podcast details from API
-    def get(self, request, **kwargs):
-
+# podcast details page - only shows first 5 episodes
+class Episodes(TemplateView):
+    def retrieveData(self, request):
         # get user-agent
         userAgent = request.META['HTTP_USER_AGENT']
 
@@ -23,7 +24,7 @@ class Podcast(TemplateView):
 
         # get name of podcast being requested 
         url = request.build_absolute_uri('?')
-        podcastName = readURL(url)
+        podcastName = readURL(url)[0]
 
         # get url of podcast
         url = api.nameMap.lookup(podcastName)
@@ -54,8 +55,17 @@ class Podcast(TemplateView):
         variables = ({
             "podcast": content,
             "episodeCount": episodeCount,
-            "firstGroup": firstGroup,
+            "episodes": firstGroup,
             "podcastName": podcastName
         })
 
+        return variables
+
+    # return page after making request for podcast details from API
+    def get(self, request, **kwargs):
+        variables = self.retrieveData(request)
         return render(request, 'podcast.html', context=variables)
+
+# full episode list page
+class Podcast(Episodes):
+    pass

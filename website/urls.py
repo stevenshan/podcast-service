@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^dashboard/$', views.Dashboard.as_view()),
     url(r'^search/$', views.Search.as_view()), # search
     url(r'^podcast/[^/]*$', views.Podcast.as_view()), # podcast information
+    url(r'^podcast/[^/]*/episodes$', views.Episodes.as_view()), # podcast episode list
     url(r'^$', views.HomePage.as_view()),
 ]

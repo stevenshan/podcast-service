@@ -11,7 +11,9 @@ import re # regular expressions
 from lxml import etree # XML parsing for episode feed
 
 # regex pattern to get name of podcast from url
-podcastPat = re.compile("\/podcast\/([^\/]+)$")
+podcastPat = re.compile("\/podcast\/([^\/]+)$") # matches exactly one level after podcast
+podcastPatWhole = re.compile("\/podcast\/(.+)") # get everything after podcast
+podcastPatBreak = re.compile("[^\/]+") # split by delimeter /
 
 # regex pattern to get podcast feed url from gpodder html code
 gPodderReverse = re.compile("<a href=\"([^\"]+)\" title=\"Feed\">")

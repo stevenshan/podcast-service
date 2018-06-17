@@ -39,7 +39,7 @@ class Search(TemplateView):
                     podcast["mygpo_link"],
                     podcast["url"]
                 )
-            except Exception as e:
+            except:
                 name = ""
             podcast["idName"] = name
 

@@ -9,6 +9,8 @@ from search import Search
 
 # show details for podcast - /podcast
 from podcast import Podcast
+# show full list of podcast episodes - /podcast/*/episodes
+from podcast import Episodes 
 
 # User dashboard as front page for logged in users
 from base import *

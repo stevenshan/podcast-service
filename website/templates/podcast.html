@@ -1,93 +1,14 @@
 {# Page for showing podcast details #}
 
-{% extends 'template.html' %}
+{# subclass episodes in order to add description, fewer episodes are #}
+{# displayed through the view, which lowers the episodes in the context #}
+{% extends 'episodes.html' %}
 
-{% block stylesheets %}
-{% load static %}
-<link href="{% static 'website/css/podcast.css' %}" rel="stylesheet">
-<link href="{% static 'website/css/podcast.mobile.css' %}" rel="stylesheet">
-{% endblock %}
-
-{% block title %}
-{{ podcast.title }}
-{% endblock %}
-
-{% block content %}
-
-<div id="podcastTitle">
-    {{ podcast.title }}
-</div>
-
-<section id="content">
-    <section id="podcastMeta">
-        <div id="thumbnailContainer">
-            <img src="{{ podcast.logo_url }}" id="thumbnail"
-                    onerror="this.src='{% static 'website/imgs/thumbnail.jpeg' %}'">
-            <div id="subscribers">
-                {{ podcast.subscribers }}
-            </div>
-        </div>
-        <div id="linksSection">
-            <label id="linksHeader">
-                Links
-            </label>
-            <div id="linkWebsite">
-                <a href="{{ podcast.website }}">Website</a>
-            </div>
-            <div id="linkURL">
-                <a href="{{ podcast.url }}">RSS Feed</a>
-            </div>
-            <div id="linkGPOLink">
-                <a href="{{ podcast.mygpo_link }}">gPodder Page</a>
-            </div>
-        </div>
-    </section>
-
-    <div id="podcastContent">
-        <section class="contentSection">
-            <div class="contentTitle" id="podcastDesc">Description</div>
-            <p>
-                {{ podcast.description }}
-            </p>
-        </section>
-        <section class="contentSection" id="podcastFirstEp">
-            <div class="contentTitle">
-                Episodes
-                <small>
-                    ({{ episodeCount }} total)
-                </small>
-            </div>
-            {% if episodeCount == 0 %}
-            <h1>No Episodes Found</h1>
-            {% else %}
-            {% for episode in firstGroup %}
-            {% if forloop.counter0 == 0 %}
-            <div class="episodeSummary" style="margin-top: 0px">
-            {% else %}
-            <div class="episodeSummary">
-            {% endif %}
-                <div class="episodeTitle">
-                    <a>
-                        {{ episode.title }}
-                    </a>
-                </div>
-                <div class="episodeRelease">
-                    <small>{{ episode.released }}</small>
-                </div>
-                <p>
-                    {{ episode.description }}
-                </p>
-            </div>
-            {% if forloop.counter == firstGroup|length and episodeCount > firstGroup|length %}
-            <a href="{{ podcastName }}/episodes" id="moreEpisodesButton">More Episodes</a>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-        </section>
-    </div>
-
-    <!-- element just to clear float -->
-    <div id="podcastClear"></div>
+{% block contentSection %}
+<section class="contentSection">
+    <div class="contentTitle" id="podcastDesc">Description</div>
+    <p>
+        {{ podcast.description }}
+    </p>
 </section>
-
 {% endblock %}
