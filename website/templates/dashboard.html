@@ -3,6 +3,14 @@
 {% extends 'search.html' %}
 
 {% block defaultSearchScript %}
+{% load static %}
+<script src="{% static 'website/js/dashboard.js' %}" type="text/javascript">
+</script>
+{% endblock %}
+
+{% block morestylesheet %}
+{% load static %}
+<link href="{% static 'website/css/dashboard.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block title %}
@@ -26,4 +34,21 @@ User Subscriptions
 
 {# makes no sense to sort subscriptions by tag #}
 {% block sidebarTag %}
+{% endblock %}
+
+{% block freqLabel %}
+<span id="statsLabelFrequency" title="episodes/day">Frequency</span>
+{% endblock %}
+
+{% block freq %}
+<div class="stats">
+    <span class="subscribers">
+        {{ result.freq }}
+    </span>
+</div>
+{% endblock %}
+
+{% block sortOptions %}
+<option value="highFreq">Highest Frequency</option>
+<option value="lowFreq">Lowest Frequency</option>
 {% endblock %}

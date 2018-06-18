@@ -117,7 +117,15 @@ $(function(){
             {
                 results.sort(lexicZA);
                 break; 
-            } 
+            }
+            default:
+            {
+                try
+                {
+                    extraSort(results, $(this).val());
+                }
+                catch(e) {}
+            }
         }
 
         // add search results back to page

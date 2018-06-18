@@ -32,6 +32,24 @@ class Dashboard(TemplateView):
             except:
                 name = ""
             podcast["idName"] = name
+            podcast["freq"] = 0
+
+            # get frequency of episodes in terms of episodes/day
+            try:
+                episodes = api.endpoints.feedList(podcast["url"], headers)
+                convert = lambda x: int(x.strftime("%s"))
+
+                deltas = []
+                for i in range(len(episodes) - 1):
+
+                    deltas.append(abs(convert(episodes[i]["timestamp"]) - 
+                        convert(episodes[i + 1]["timestamp"])))
+
+                avg = (3600 * 24) / (float(sum(deltas)) / len(deltas))
+                avg = round(avg, 1)
+                podcast["freq"] = avg
+            except:
+                pass
 
         variables = ({
             "results": content,

@@ -9,17 +9,19 @@ styling for response design and resizing
     adjusts results labels 
     */
 
-    #content #searchResultHeader #podcastLabel {
-        left: 80px;
+    #searchResultHeader #podcastLabel {
+        left: 20px;
     }
 
     /* 
     make search results smaller 
     */
 
+    /* hide thumbnail */
     .searchResult .thumbnail {
         width: 50px;
         height: 50px;
+        display: none;
     }
 
     .searchResult .stats {
@@ -29,7 +31,9 @@ styling for response design and resizing
 
     .searchResult .metadata > * {
         padding: 2px 0px 3px 0px;
+        padding-left: 20px;
     }
+
 
 }
 

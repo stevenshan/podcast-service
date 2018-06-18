@@ -6,6 +6,8 @@
 {% load static %}
 <link href="{% static 'website/css/search.css' %}" rel="stylesheet">
 <link href="{% static 'website/css/search.mobile.css' %}" rel="stylesheet">
+{% block morestylesheet %}
+{% endblock %}
 {% endblock %}
 
 {% block scripts %}
@@ -37,15 +39,19 @@ keyword
     <div id="podcastLabel">Podcast</div>
     <div id="statsLabel">
         <span id="statsLabelSubscribers">Subscribers</span>
+        {% block freqLabel %}
+        {% endblock %}
     </div>
 </div> 
 <section id="content">
     {% if results|length > 0 %}
         {% for result in results %}
             {% if forloop.counter|divisibleby:2 %}
-                <div class="searchResult odd" subs="{{ result.subscribers }}">
+                <div class="searchResult odd" 
+                    subs="{{ result.subscribers }}" freq="{{ result.freq }}">
             {% else %}
-                <div class="searchResult" subs="{{ result.subscribers }}">
+                <div class="searchResult" 
+                    subs="{{ result.subscribers }}" freq="{{ result.freq }}">
             {% endif %}
                 {# left side of search result #}
                 <img src="{{ result.scaled_logo_url }}" class="thumbnail" 
@@ -116,6 +122,8 @@ keyword
             <option value="leastSubscribers">Least Subscribers</option>
             <option value="lexicAZ">Name A-Z</option>
             <option value="lexicZA">Name Z-A</option>
+            {% block sortOptions %}
+            {% endblock %}
         </select>
     </div>
     <div class="menuBoxSection">
