@@ -25,7 +25,12 @@ Podcast Search - {{ query }}
 {% block content %}
 <div id="searchResultMessage">
 {% block message %}
-Search results for <strong>{{ query }}</strong>:
+Search results for <strong>{{ query }}</strong> by 
+{% if tags %}
+tag
+{% else %}
+keyword
+{% endif %}:
 {% endblock %}
 </div>
 <div id="searchResultHeader">
@@ -52,6 +57,8 @@ Search results for <strong>{{ query }}</strong>:
                         {{ result.subscribers }}
                     </span>
                 </div>
+                {% block freq %}
+                {% endblock %}
 
                 {# center of search result - basic data like name and desc #}
                 <div class="metadata">
@@ -92,6 +99,15 @@ Search results for <strong>{{ query }}</strong>:
 {% endblock %}
 
 {% block sidebar %}
+{% block sidebarTag %}
+<li>
+    {% if tags %}
+    <a href="/search?q={{ query }}">Search by Keyword</a>
+    {% else %}
+    <a href="/tag?q={{ query }}">Search by Tag</a>
+    {% endif %}
+</li>
+{% endblock %}
 <div class="menuBox">
     <div class="menuBoxSection">
         Sort By:

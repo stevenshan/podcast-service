@@ -5,7 +5,7 @@
 from homepage import HomePage
 
 # search page - /search
-from search import Search
+from search import Search, Tags
 
 # Podcast - show details for podcast - /podcast
 # Episodes - show full list of podcast episodes - /podcast/*/episodes

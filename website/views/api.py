@@ -194,6 +194,15 @@ class OnlineEndpoints(OfflineEndpoints):
         )
         return OnlineEndpoints.processRequest(request)
 
+    # Retrieve Podcasts for Tag
+    @staticmethod
+    def tags(query, headers):
+        request = safeRequest(
+            HOST + "/api/2/tag/" + query + "/20.json",
+            headers=headers
+        )
+        return OnlineEndpoints.processRequest(request)
+
     # Retrieve Podcast Data Directory API    
     @staticmethod
     def podcast(url, headers):

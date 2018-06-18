@@ -110,7 +110,11 @@
       <!-- Search bar -->
       <div id="searchBar">
         <label id="searchBarToggle" for="searchBarToggleStatus"></label>
+        {% if tags %}
+        <form action="/tag">
+        {% else %}
         <form action="/search">
+        {% endif %}
           <input type="text" name="q" id="searchInput" 
               placeholder="Search for podcasts">
           <label></label>
@@ -129,7 +133,7 @@
         <!-- Top section of sidebar with two circular buttons -->
         <div id="topSidebar">
           <a href="/dashboard" id="dashboardLink" title="User Dashboard"></a>
-          <div id="notificationLink" title="Notifications"></div>
+          <!-- <div id="notificationLink" title="Notifications"></div> -->
         </div>
 
         <!-- Bottom section of sidebar with vertically stacked links -->
