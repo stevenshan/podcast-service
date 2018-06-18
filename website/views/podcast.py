@@ -110,6 +110,7 @@ class Podcast(Episodes):
     template = "podcast.html"
 
     # add subscribe/unsubscribe to context
+    # add keyword extracted tags
     def context(self, request, variables):
         subscribed = False
         try:
@@ -127,6 +128,22 @@ class Podcast(Episodes):
         except Exception as e:
             pass
         variables["subscribed"] = subscribed 
+
+        # extract keywords
+        text = ""
+        try:
+            # add podcast data
+            text += (variables["podcast"]["title"] + " " +
+                variables["podcast"]["description"] + " ")
+
+            # add each episode data
+            for episode in variables["episodes"]:
+                text += (episode["title"] + " " +
+                    episode["description"] + " ")
+        except:
+            pass
+        variables["keywords"] = api.keywords(text, 1)[:20]
+        variables["keywords"].sort(key=lambda x: len(x), reverse=True)
 
     # override to only return first 5 to avoid clutter
     def episodeFilter(self, episodes, urlParts):

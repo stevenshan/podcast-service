@@ -218,15 +218,15 @@ Summary section - right side with description, episodes
     /* material design properties at top */
 }
 
-#content #podcastContent #podcastDesc > .contentTitle:before {
-    content: "description";
-}
-
 #content #podcastContent #podcastEpisodes > .contentTitle:before {
     content: "folder";
 }
 
 #content #podcastContent #podcastEpisode > .contentTitle:before {
+    content: "stars";
+}
+
+#content #podcastContent #podcastTags > .contentTitle:before {
     content: "label";
 }
 
@@ -314,5 +314,29 @@ Episode Detail Page
 
 #content #podcastContent #podcastEpisode > .contentTitle {
     margin-bottom: 10px;
+}
+
+/*
+Podcast Detail Page
+*/
+
+#content #podcastTags > p {
+    line-height: 50px;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+#content #podcastTags > p > a {
+    display: inline-block;
+    padding: 0px 10px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 2px;
+    background: #8bc34a;
+    color: #ffffff;
+}
+
+#content #podcastTags > p > a:hover {
+    background: #76aa3a;
 }
 

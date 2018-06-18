@@ -364,7 +364,8 @@ def keywords(text, phraseLen = 2):
         r = Rake(max_length=phraseLen, punctuations=ignore)
         r.extract_keywords_from_text(text)
         phrases = r.get_ranked_phrases()[:20]
-    except:
+    except Exception as e:
+        print(e)
         pass
     return phrases
 
