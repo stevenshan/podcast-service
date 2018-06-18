@@ -588,6 +588,25 @@ Bottom Sidebar - menu on left with vertically stacked links
     background: #F3F3F3;
 }
 
+#main #sidebar #menuSidebar .menuBox {
+    padding: 15px 15px 15px 40px;
+    color: #4f4f4f;
+    font-size: 14px;
+}
+
+#main #sidebar #menuSidebar .menuBox select {
+    margin-left: 10px;
+    padding: 5px 10px;
+    width: 120px;
+    float: right;
+}
+
+#main #sidebar #menuSidebar .menuBox .menuBoxSection {
+    margin-bottom: 15px;
+    height: 30px;
+    line-height: 30px;
+}
+
 /*
 ===========================================
 Content - the actually important stuff

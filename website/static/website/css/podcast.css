@@ -195,11 +195,17 @@ Summary section - right side with description, episodes
 #content #podcastContent .contentSection > .contentTitleSub {
     padding-left: 30px;
     margin-bottom: 20px;
+    height: 25px;
+    line-height: 25px;
 }
 
 /* for subscript like total count of episodes */
 #content #podcastContent .contentSection > .contentTitle small {
     margin-left: 5px;
+}
+
+#content #podcastContent .contentSection > .contentTitleSub a {
+    margin-left: 10px;
 }
 
 #content #podcastContent .contentSection > .contentTitle:before {
@@ -245,7 +251,7 @@ Episode Summary List Section
 */
 
 #content #podcastContent .contentSection .episodeSummary {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .episodeSummary .episodeTitle {

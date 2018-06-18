@@ -61,18 +61,20 @@ def parseFeedXML(xml):
                     len(description) >= 1 and
                     "url" in enclosures[0].attrib
             ):
+                date = toDate(pubDate[0].text)
                 episodeDict = ({
                     "url": enclosures[0].attrib["url"], 
                     "title": title[0].text,
                     "description": description[0].text,
-                    "released": toDate(pubDate[0].text)
+                    "released": date.strftime("%b %d, %Y"),
+                    "timestamp": date
                 })
                 result.append(episodeDict)
     except:
         pass
 
     # sort urls by publication date
-    key = lambda x: x["released"] # get publication date from tuple
+    key = lambda x: x["timestamp"] # get publication date from tuple
     result.sort(key=key,reverse=True)
 
     # enumerate episodes
