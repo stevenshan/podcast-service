@@ -7,6 +7,7 @@ Application for Capital One Software Engineering Summit (2018).
 - Several options for sorting podcasts or episodes:
     - for podcasts: most/least subscribers and lexicographic
     - for subscriptions: most/least subscribers, lexicographic, and frequency of new episode releases
+        - prioritize listening to podcasts that release episodes more frequently because missing just a few days could put you far behind on new epsiodes
     - for episodes: chronological
 - Several options for filtering podcasts or episodes such as setting minimum or maximum number of subscribers, and year episode was released
 - Front page with most frequently searched queries and most popular podcasts for exploring new podcasts
@@ -27,6 +28,7 @@ I built the web app using Django. The project related code is in the `website` a
 - the data from the gPodder API is occassionally outdated or has diverged from the RSS feed of the podcast so instead of using the Episode Data endpoint I scraped all of the data directly from the RSS feed
 - this was my first time using Django so there's probably areas where the code was more complicated than it needed to be
 - I wasn't sure how gPodder was mapping podcast names to URLs since many podcasts share a name and they did not assign a primary key to each podcast. My solution to this was to add podcasts as they were being searched to a dictionary along with the last segment of the `mygpo_link`, which served as the key.
+- in some of the RSS feeds, episode's descriptions were stored in an XML `description` tag while other times they were in a `summary` tag under the `itunes` namespace
 
 ## Problem Statement
 We live in the age of the podcast. It seems like almost everyone has one, with focuses ranging from broad news coverage to specific niche topics, with some podcasts being about nothing other than goofing off with friends. That podcast proliferation makes it difficult to keep up with what's new and interesting in the podcast world.
