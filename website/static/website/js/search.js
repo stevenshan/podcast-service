@@ -186,5 +186,5 @@ $(function(){
 function resetFilter()
 {
     $("#minSubs").val("");
-    $("#maxSubs").val("").trigger("focusout");
+    $("#maxSubs").val("").trigger("change");
 }

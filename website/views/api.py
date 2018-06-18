@@ -11,6 +11,8 @@ import re # regular expressions
 from lxml import etree # XML parsing for episode feed
 import json
 
+from rake_nltk import Rake # for keyword extraction
+
 ###########################################################
 # Data extraction
 ###########################################################
@@ -353,6 +355,19 @@ def readURL(url, pattern = podcastPatWhole):
     if len(match) != 0:
         return match
     return None
+
+# returns a list of keyword phrases
+def keywords(text, phraseLen = 2):
+    phrases = []
+    try:
+        ignore = "'()[]{}!@#$%^&*?><,.\";:|\\`~"
+        r = Rake(max_length=phraseLen, punctuations=ignore)
+        r.extract_keywords_from_text(text)
+        phrases = r.get_ranked_phrases()[:20]
+    except:
+        pass
+    return phrases
+
 
 ###########################################################
 # Database methods - maps podcast name to url

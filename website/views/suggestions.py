@@ -3,8 +3,6 @@ from base import *
 # import function to get list of subscriptions
 from dashboard import getSubs
 
-from rake_nltk import Rake # for keyword extraction
-
 # home page showing top group of podcasts
 class Suggestions(TemplateView):
     def get(self, request, **kwargs):
@@ -48,14 +46,7 @@ class Suggestions(TemplateView):
             except:
                 pass
 
-        phrases = []
-        try:
-            ignore = "'()[]{}!@#$%^&*?><,.\";:|\\`~"
-            r = Rake(max_length=2, punctuations=ignore)
-            r.extract_keywords_from_text(text)
-            phrases = r.get_ranked_phrases()[:20]
-        except:
-            pass
+        phrases = api.keywords(text)
 
         variables = ({
             "results": content,

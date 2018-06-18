@@ -37,6 +37,9 @@ Suggested Podcasts
             </a>
         </div> 
     {% endfor %}
+    {% if phrases|length == 0 %}
+        <h4>Nothing yet</h4>
+    {% endif %}
 </div>
 {% endblock %}
 

@@ -605,8 +605,8 @@ Bottom Sidebar - menu on left with vertically stacked links
     padding: 10px;
     width: 100%;
     color: #474747;
-    border: 1px solid #b2b2b2;
-    border-radius: 2px;
+    border-bottom: 2px solid #b2b2b2;
+    background: transparent;
 }
 
 /* make placeholder black so it can be seen */
