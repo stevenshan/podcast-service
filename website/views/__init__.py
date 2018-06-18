@@ -15,12 +15,11 @@ from podcast import Podcast, Episodes, Episode
 # Login screen - /login
 from user_auth import Login, Register
 
-# User dashboard as front page for logged in users
-from base import *
+# Dashboard screen - /dashboard
+from dashboard import Dashboard
 
-class Dashboard(TemplateView):
-    def get(self, request, **kwargs):
-        return render(request, 'dashboard.html', context=None)
+# import base for views in order to do initialization
+from base import *
 
 ###########################################################
 # Initialization - stuff to do when server starts

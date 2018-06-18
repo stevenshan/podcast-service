@@ -99,6 +99,7 @@ class Episode(TemplateView):
     def get(self, request, **kwargs):
         try:
             variables = self.retrieveData(request)
+            variables["auth"] = api.packAuth(request)
         except Redirect as redirectObj:
             return redirectObj.redirect
         return render(request, self.template, context=variables)

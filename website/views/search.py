@@ -45,7 +45,8 @@ class Search(TemplateView):
 
         variables = ({
             "query": query,
-            "results": content
+            "results": content,
+            "auth": api.packAuth(request)
         })
 
         return render(request, 'search.html', context=variables)

@@ -29,6 +29,12 @@ def safeRequest(url, params = {}, headers = {}):
     except:
         return None
 
+def safePOST(url, auth = (), headers = {}, cookies = {}):
+    try:
+        return requests.post(url, auth=auth, headers=headers, cookies=cookies)
+    except:
+        return None;
+
 def toDate(dateString):
     try:
         return parseDate(dateString)
@@ -131,6 +137,39 @@ class OnlineEndpoints(OfflineEndpoints):
         else:
             return request.content 
 
+    # Login Authentication API - returns request response
+    @staticmethod
+    def login(username, password, headers):
+        request = safePOST(
+            HOST + "/api/2/auth/" + username + "/login.json",
+            auth=(username, password),
+            headers=headers
+        )
+        return request
+
+    # check if user is logged in
+    @staticmethod
+    def loggedIn(request):
+        try:
+            # get credentials from session
+            username = request.session["username"]
+            sessionid = request.session["sessionid"]
+            userAgent = request.META["HTTP_USER_AGENT"]
+
+            headers = ({
+                "User-Agent": userAgent     
+            })
+
+            request = safePOST(
+                HOST + "/api/2/auth/" + username + "/login.json",
+                cookies={"sessionid": sessionid},
+                headers=headers
+            )
+
+            return request.status_code == 200
+        except:
+            return False
+
     # Podcast Search Directory API
     @staticmethod
     def search(query, headers):
@@ -139,7 +178,6 @@ class OnlineEndpoints(OfflineEndpoints):
             params={"q": query},
             headers=headers
         )
-
         return OnlineEndpoints.processRequest(request)
 
     # Retrieve Podcast Data Directory API    
@@ -150,7 +188,6 @@ class OnlineEndpoints(OfflineEndpoints):
             params={"url": url},
             headers=headers
         )
-
         return OnlineEndpoints.processRequest(request)
 
     # Gets list of Episode URLs from podcast url
@@ -167,12 +204,31 @@ class OnlineEndpoints(OfflineEndpoints):
             params={"podcast": url, "url": episode_url},
             headers=headers
         )
-        print(request, url, episode_url)
         return OnlineEndpoints.processRequest(request)
 
 # change between OnlineEndpoints and OfflineEndpoints for testing
-endpoints = OfflineEndpoints 
-# endpoints = OnlineEndpoints
+# endpoints = OfflineEndpoints 
+endpoints = OnlineEndpoints
+
+###########################################################
+# Shared Methods 
+###########################################################
+
+# get authentication information to send to template for render
+def packAuth(request):
+    package = ({
+        "loggedIn": False,
+        "username": ""
+    })
+
+    package["loggedIn"] = endpoints.loggedIn(request)
+    if package["loggedIn"]:
+        try:
+            package["error"] = request.session["username"]
+        except:
+            pass
+
+    return package
 
 ###########################################################
 # Database methods - maps podcast name to url

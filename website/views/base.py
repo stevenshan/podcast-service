@@ -1,3 +1,6 @@
+# file that includes most imports that any view will need
+# use "from base import *" when creating a new view
+
 # standard imports for creating django views
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
