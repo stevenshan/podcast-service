@@ -1,8 +1,20 @@
+/*
+ * Javascript code for Podcast, Episode, and Episodes List pages
+ */
+
+/*
+ * Helpers
+ */
+
 function getAttr(elem, key)
 {
     try { return parseInt(elem.attr(key)) }
     catch(e) { return 0; }
 }
+
+/*
+ * Run function on load
+ */
 
 $(function(){
 

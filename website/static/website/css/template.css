@@ -597,8 +597,35 @@ Bottom Sidebar - menu on left with vertically stacked links
 #main #sidebar #menuSidebar .menuBox select {
     margin-left: 10px;
     padding: 5px 10px;
-    width: 120px;
+    width: 150px;
     float: right;
+}
+
+#main #sidebar #menuSidebar .menuBox input {
+    padding: 10px;
+    width: 100%;
+    color: #474747;
+}
+
+/* make placeholder black so it can be seen */
+
+#main #sidebar #menuSidebar .menuBox input::placeholder {
+    color: #9e9e9e;
+    font-family: 'Lato', sans-serif;
+    opacity: 1;
+}
+
+#main #sidebar #menuSidebar .menuBox ::-webkit-input-placeholder {
+    color: #9e9e9e;
+}
+#main #sidebar #menuSidebar .menuBox ::-moz-placeholder {
+    color: #9e9e9e;
+}
+#main #sidebar #menuSidebar .menuBox :-ms-input-placeholder {
+    color: #9e9e9e;
+}
+#main #sidebar #menuSidebar .menuBox :-moz-placeholder {
+    color: #9e9e9e;
 }
 
 #main #sidebar #menuSidebar .menuBox .menuBoxSection {

@@ -12,6 +12,8 @@
 <script type="text/javascript">
     var defaultSearchValue = "{{ query }}";
 </script>
+{% load static %}
+<script src="{% static 'website/js/search.js' %}" type="text/javascript"></script>
 {% endblock %}
 
 {% block title %}
@@ -32,9 +34,9 @@ Search results for <strong>{{ query }}</strong>:
     {% if results|length > 0 %}
         {% for result in results %}
             {% if forloop.counter|divisibleby:2 %}
-                <div class="searchResult odd">
+                <div class="searchResult odd" subs="{{ result.subscribers }}">
             {% else %}
-                <div class="searchResult">
+                <div class="searchResult" subs="{{ result.subscribers }}">
             {% endif %}
                 {# left side of search result #}
                 <img src="{{ result.scaled_logo_url }}" class="thumbnail" 
@@ -74,5 +76,32 @@ Search results for <strong>{{ query }}</strong>:
         </div>
     {% endif %}
 
+    <div id="filterTooWideMesg">
+        No search results found. Try loosening the range.
+        <br><br>
+        <label onclick="resetFilter();">Reset Filter</label>
+    </div>
+
 </section>
 {% endblock %}
+
+{% block sidebar %}
+<div class="menuBox">
+    <div class="menuBoxSection">
+        Sort By:
+        <select id="searchSortOpt">
+            <option value="mostSubscribers">Most Subscribers</option>
+            <option value="leastSubscribers">Least Subscribers</option>
+            <option value="lexicAZ">Name A-Z</option>
+            <option value="lexicZA">Name Z-A</option>
+        </select>
+    </div>
+    <div class="menuBoxSection">
+        <div style="margin-bottom: 5px">Number of Subscribers:</div>
+        <input type="text" id="minSubs" placeholder="Minimum">
+        <div style="text-align: center;">to</div>
+        <input type="text" id="maxSubs" placeholder="Maximum">
+    </div>
+</div> 
+{% endblock %}
+

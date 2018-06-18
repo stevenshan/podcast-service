@@ -177,3 +177,16 @@ Default page when no search results
     /* Support for IE. */
     font-feature-settings: 'liga';
 }
+
+/* shown when filter is too specific */
+
+#filterTooWideMesg {
+    padding: 30px;
+    display: none;
+}
+
+#filterTooWideMesg label {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
