@@ -1,0 +1,43 @@
+{# Page for user login #}
+
+{% extends 'user/base.html' %}
+
+{% block stylesheets %}
+{% load static %}
+<link href="{% static 'website/css/devices.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# override content block to add devices list #}
+{% block content %}
+
+<form action="/devices/" method="post">
+    {% csrf_token %}
+    <table id="devicesTable">
+        <thead>
+            <tr>
+                <td>Active</td>
+                <td>Device</td>
+                <td>Subscriptions</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dev in devices %}
+            <tr>
+                <td class="inputCell">
+                    {% if forloop.counter0 == auth.device %}
+                    <input name="device" type="radio" value="{{ forloop.counter0 }}" checked>
+                    {% else %}
+                    <input name="device" type="radio" value="{{ forloop.counter0 }}">
+                    {% endif %}
+                </td>
+                <td>{{ dev.caption }}</td>
+                <td>{{ dev.subscriptions }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <input type="submit" value="Update" id="submitButton">
+</form>
+
+{% endblock %}

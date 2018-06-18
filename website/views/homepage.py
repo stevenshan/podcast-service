@@ -2,4 +2,7 @@ from base import *
 
 class HomePage(TemplateView):
     def get(self, request, **kwargs):
-        return render(request, 'template.html', context=None)
+        variables = ({
+            "auth": api.packAuth(request)
+        })
+        return render(request, 'template.html', context=variables)

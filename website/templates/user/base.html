@@ -36,6 +36,7 @@
             Podcasts
         </a>
         <div id="userBox">
+            {% if env != "none" %}
             <div id="modeSwitch">
                 {% if env == "login" %}
                 <a href="/login" class="active">
@@ -52,6 +53,7 @@
                     Register
                 </a>
             </div>
+            {% endif %}
 
             {% block content %}
             {% endblock %}

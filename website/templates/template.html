@@ -90,12 +90,18 @@
 
         <!-- User profile itself -->
         <div id="userMenu">
-          <span>John Doe</span>
-          <a>Link 1</a>
-          <a>Link 2</a>
-          <a>Link 3</a>
-          <a>Link 4</a>
-          <a>Link 5</a>
+          {# if user is logged in #}
+          {% if auth.loggedIn %}
+          <span>{{ auth.username }}</span>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/devices">Devices</a>
+          <a href="/subscriptions">Subscriptions</a>
+          <a href="/logout">Logout</a>
+          {% else %}
+          <span>Not logged in</span>
+          <a href="/login">Login</a>
+          <a href="/register">Register</a>
+          {% endif %}
         </div>
 
       </div>

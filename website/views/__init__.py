@@ -13,7 +13,10 @@ from search import Search
 from podcast import Podcast, Episodes, Episode
 
 # Login screen - /login
-from user_auth import Login, Register
+from user_auth import Login, Register, Logout
+
+# Devices list screen - /devices
+from devices import Devices
 
 # Dashboard screen - /dashboard
 from dashboard import Dashboard

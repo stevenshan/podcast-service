@@ -1,0 +1,63 @@
+/*
+Stylesheet that goes along with user_auth.css but contains 
+styling for response design and resizing
+
+
+*/
+
+@media only screen and (max-width: 600px) {
+
+    /*
+    ===========================================
+    Title - link back to homepage
+    ===========================================
+    */
+
+    #title {
+        top: -50px;
+    }
+
+     /*
+    ===========================================
+    Wrapper - center boxes on screen
+    ===========================================
+    */
+
+    #wrapper {
+        width: 350px;
+        height: 550px;
+    }
+
+    /*
+    -------------------------------------------
+    User box - login/registration screen
+    -------------------------------------------
+    */
+
+    #wrapper #userBox {
+        margin-left: 30px;
+        margin-right: 30px;
+        text-align: center;
+    }
+
+    #wrapper #userBox #modeSwitch {
+        margin-top: 40px;
+    }
+
+    #wrapper #userBox #modeSwitch > a {
+        width: 120px;
+    }
+
+    /*
+    ===========================================
+    Error Message
+    ===========================================
+    */
+
+    body.haserror #wrapper #userBox #modeSwitch {
+        margin-top: 20px;
+    }
+
+
+}
+

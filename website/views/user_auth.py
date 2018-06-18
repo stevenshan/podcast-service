@@ -33,6 +33,7 @@ class Login(UserView):
                 sessionid = response.cookies["sessionid"]
                 request.session["sessionid"] = sessionid
                 request.session["username"] = username 
+                request.session["device"] = 0
 
                 # redirect to user dashboard if success
                 return redirect("/dashboard")            
@@ -51,7 +52,7 @@ class Register(UserView):
     env = "register"
 
 # view for logout screen - /logout
-class UserView(TemplateView):
+class Logout(TemplateView):
     def get(self, request, **kwargs):
         # send logout request to api
         try:

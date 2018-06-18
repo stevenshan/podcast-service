@@ -23,10 +23,10 @@ gPodderReverse = re.compile("<a href=\"([^\"]+)\" title=\"Feed\">")
 ###########################################################
 
 # sends get request with exception handling in case bad connection
-def safeRequest(url, params = {}, headers = {}):
+def safeRequest(url, params = {}, headers = {}, cookies = {}):
     try:
-        return requests.get(url, params=params, headers=headers) 
-    except:
+        return requests.get(url, params=params, headers=headers, cookies=cookies) 
+    except Exception as e:
         return None
 
 def safePOST(url, auth = (), headers = {}, cookies = {}):
@@ -215,6 +215,17 @@ class OnlineEndpoints(OfflineEndpoints):
         )
         return OnlineEndpoints.processRequest(request)
 
+    # Retrieve devices from List Devices API
+    @staticmethod
+    def devices(username, sessionid, headers):
+        request = safeRequest(
+            HOST + "/api/2/devices/" + username + ".json",
+            cookies={"sessionid": sessionid},
+            headers=headers
+        )
+        return OnlineEndpoints.processRequest(request)
+
+
 # change between OnlineEndpoints and OfflineEndpoints for testing
 # endpoints = OfflineEndpoints 
 endpoints = OnlineEndpoints
@@ -233,8 +244,9 @@ def packAuth(request):
     package["loggedIn"] = endpoints.loggedIn(request)
     if package["loggedIn"]:
         try:
-            package["error"] = request.session["username"]
-        except:
+            package["username"] = request.session["username"]
+            package["device"] = request.session["device"]
+        except Exception as e:
             pass
 
     return package
