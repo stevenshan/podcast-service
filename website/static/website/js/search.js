@@ -6,18 +6,21 @@
  * Helpers
  */
 
+// get html element attribute or default to 0
 function getAttr(elem, key)
 {
     try { return parseInt(elem.attr(key)) }
     catch(e) { return 0; }
 }
 
+// get name of podcast in search result html element
 function getTitleVal(elem)
 {
     try { return elem.find(".title a").html().replace(/\s/g, ''); }
     catch(e) { return ""; }
 }
 
+// safely convert string to an integer or return null
 function string2int(value)
 {
     try 
@@ -46,16 +49,19 @@ function fallInRange()
 
 // sorting methods
 
+// sort numbers high to low
 function mostSubsSort(a, b)
 {
     return getAttr(b, "subs") - getAttr(a, "subs");
 }
 
+// sort numbers low to high
 function leastSubsSort(a, b)
 {
     return getAttr(a, "subs") - getAttr(b, "subs");
 }
 
+// sort strings from a to z
 function lexicAZ(a, b)
 {
     var x = getTitleVal(a).toLowerCase();
@@ -65,6 +71,7 @@ function lexicAZ(a, b)
     return 0;
 }
 
+// sort strings from z to a
 function lexicZA(a, b)
 {
     return -1 * lexicAZ(a, b);

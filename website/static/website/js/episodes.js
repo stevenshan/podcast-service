@@ -5,7 +5,8 @@
 /*
  * Helpers
  */
-
+ 
+// get html element attribute or default to 0
 function getAttr(elem, key)
 {
     try { return parseInt(elem.attr(key)) }
