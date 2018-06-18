@@ -45,7 +45,7 @@ To solve this challenge, build a web application that provides:
 
 (Optional) Bonus features you may want to include:
 
-The ability to see podcasts that have gained the most subscribers in a given period of time.
+- The ability to see podcasts that have gained the most subscribers in a given period of time.
 - Recommendations within a genre.
 - Recommendations based on similarity to a user's subscriptions.
 - Generate a sample user's listening habits and subscriptions. How often 
