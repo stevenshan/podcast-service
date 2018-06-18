@@ -21,12 +21,7 @@ class Login(UserView):
     # authenticate user if POST request
     def post(self, request, **kwargs):
 
-        # get user-agent
-        userAgent = request.META['HTTP_USER_AGENT']
-
-        headers = ({
-            "User-Agent": userAgent
-        })
+        headers = api.genHeader(request)
 
         # try todele authenticate using API
         username = request.POST.get("username", "")
@@ -58,6 +53,15 @@ class Register(UserView):
 # view for logout screen - /logout
 class UserView(TemplateView):
     def get(self, request, **kwargs):
+        # send logout request to api
+        try:
+            headers = api.genHeader(request)
+            username = request.session["username"]
+            sessionid = request.session["sessionid"]
+            api.endpoints.logout(username, sessionid, headers)
+        except: 
+            pass
+
         # delete user session variables
         try:
             del request.session["sessionid"]  

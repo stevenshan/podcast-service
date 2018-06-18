@@ -170,6 +170,15 @@ class OnlineEndpoints(OfflineEndpoints):
         except:
             return False
 
+    # send logout request to api
+    @staticmethod
+    def logout(username, sessionid, headers):
+        request = safePOST(
+            HOST + "/api/2/auth/" + username + "/logout.json",
+            cookies={"sessionid": sessionid},
+            headers=headers
+        )
+
     # Podcast Search Directory API
     @staticmethod
     def search(query, headers):
@@ -229,6 +238,17 @@ def packAuth(request):
             pass
 
     return package
+
+# returns generic header
+def genHeader(request):
+    header = {}
+    try:
+        # get user-agent
+        userAgent = request.META['HTTP_USER_AGENT']
+        header["User-Agent"] = userAgent
+    except:
+        pass
+    return header
 
 ###########################################################
 # Database methods - maps podcast name to url

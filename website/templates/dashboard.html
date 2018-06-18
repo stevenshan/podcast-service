@@ -6,4 +6,7 @@ test dashboard
     Not logged in.
 {% endif %}
 
-{{ test }}
+{% if auth.loggedIn %}
+logged in
+{% endif %}
+

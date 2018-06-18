@@ -12,16 +12,12 @@ class Search(TemplateView):
 
         # get search query
         query = get("q")
-        # get user-agent
-        userAgent = request.META['HTTP_USER_AGENT']
 
         # make sure a valid search query was inputed
         if query == None or query.strip(" ") == "":
             return redirect("/")
 
-        headers = ({
-            "User-Agent": userAgent
-        })
+        headers = api.genHeader(request)
 
         # make api request for search
         searchRequest = api.endpoints.search(query, headers)

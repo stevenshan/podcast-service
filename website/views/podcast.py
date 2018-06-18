@@ -34,12 +34,8 @@ class Episode(TemplateView):
     # get podcast data from gpodder endpoint and then go
     # to feed of podcast and retrieve episodes list
     def retrieveData(self, request):
-        # get user-agent
-        userAgent = request.META['HTTP_USER_AGENT']
 
-        headers = ({
-            "User-Agent": userAgent
-        })
+        headers = api.genHeader(request)
 
         # get name of podcast being requested 
         url = request.build_absolute_uri('?')

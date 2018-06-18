@@ -4,4 +4,7 @@ from base import *
 class Dashboard(TemplateView):
     def get(self, request, **kwargs):
         loggedin = api.endpoints.loggedIn(request)
-        return render(request, 'dashboard.html', context={"test": loggedin})
+        variables = ({
+            "auth": api.packAuth(request)     
+        })
+        return render(request, 'dashboard.html', context=variables)
