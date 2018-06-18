@@ -272,6 +272,7 @@ class OnlineEndpoints(OfflineEndpoints):
         try:
             response = json.loads(response)
             deviceid = response[device]["id"]
+            print(deviceid)
 
             request = safeRequest(
                 HOST + "/subscriptions/" + username + ".json",

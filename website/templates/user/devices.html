@@ -29,10 +29,13 @@
             <tr>
                 <td class="inputCell">
                     {% if forloop.counter0 == auth.device %}
-                    <input name="device" type="radio" value="{{ forloop.counter0 }}" checked>
+                    <input name="device" type="radio" value="{{ forloop.counter0 }}" checked
+                        id="device{{ forloop.counter0 }}Input">
                     {% else %}
-                    <input name="device" type="radio" value="{{ forloop.counter0 }}">
+                    <input name="device" type="radio" value="{{ forloop.counter0 }}"
+                        id="device{{ forloop.counter0 }}Input">
                     {% endif %}
+                    <label for="device{{ forloop.counter0 }}Input"></label>
                 </td>
                 <td>{{ dev.caption }}</td>
                 <td>{{ dev.subscriptions }}</td>

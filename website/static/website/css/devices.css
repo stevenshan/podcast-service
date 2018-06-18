@@ -41,6 +41,71 @@ Devices List Table
     padding-left: 15px;
 }
 
+/*
+-------------------------------------------
+Checkboxes
+-------------------------------------------
+*/
+
+#devicesTable .inputCell input {
+    display: none;
+}
+
+#devicesTable .inputCell label {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: #e8e8e8;
+    cursor: pointer;
+    position: relative;
+}
+
+#devicesTable .inputCell label:hover {
+    background-color: #d1d1d1;
+}
+
+#devicesTable .inputCell input:checked + label:after {
+    display: block;
+    content: "check";
+    text-align: center;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+
+    /* material design icon */
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/*
+ * Adjust margins on update button and error message
+ */
+
 #submitButton {
     margin-top: 50px;
 }

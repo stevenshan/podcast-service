@@ -193,6 +193,9 @@ User box - login/registration screen
     border-radius: 27px;
     cursor: pointer;
     margin-top: 80px;
+
+    /* remove ugly iOS gradient */
+    -webkit-appearance: none;
 }
 
 #submitButton:hover {
