@@ -1,0 +1,57 @@
+{# Page for homepage / #}
+
+{% extends 'search.html' %}
+
+{% block defaultSearchScript %}
+{% endblock %}
+
+{% block morestylesheet %}
+{% load static %}
+<link href="{% static 'website/css/homepage.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+Podcast Service
+{% endblock %}
+
+{% block message %}
+Top 20 Podcasts
+{% endblock %}
+
+{% block noResultMessage %}
+<span>This should never really be empty...</span>
+<div>
+    <span>Suggestions:</span>
+    <ul>
+        <li>There may be a problem with the api connection</li>
+        <li>I guess just wait a little bit</li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="menuBox" id="topSearches">
+    <h3>Top Searches</h3>
+    {% for search in topSearches %}
+        <div>
+            <a href="/search?q={{ search }}">
+                {{ search }}
+            </a>
+        </div> 
+    {% endfor %}
+</div>
+{% endblock %}
+
+{# overwrite blocks in search #}
+
+{% block sidebarTag %}
+{% endblock %}
+
+{% block freqLabel %}
+{% endblock %}
+
+{% block freq %}
+{% endblock %}
+
+{% block sortOptions %}
+{% endblock %}

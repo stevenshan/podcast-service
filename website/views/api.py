@@ -187,6 +187,7 @@ class OnlineEndpoints(OfflineEndpoints):
     # Podcast Search Directory API
     @staticmethod
     def search(query, headers):
+        searches.add(query)
         request = safeRequest(
             HOST + "/search.json",
             params={"q": query},
@@ -197,8 +198,18 @@ class OnlineEndpoints(OfflineEndpoints):
     # Retrieve Podcasts for Tag
     @staticmethod
     def tags(query, headers):
+        searches.add(query)
         request = safeRequest(
             HOST + "/api/2/tag/" + query + "/20.json",
+            headers=headers
+        )
+        return OnlineEndpoints.processRequest(request)
+
+    # Retrieve top 20 podcasts
+    @staticmethod
+    def topPodcasts(headers):
+        request = safeRequest(
+            HOST + "/toplist/20.json",
             headers=headers
         )
         return OnlineEndpoints.processRequest(request)
@@ -345,6 +356,7 @@ class DummyDB:
 
 # gets set by __init__.py to actual database
 nameDB = DummyDB()
+searchDB = {"top": [], "lib": {}, "count": 0}
 
 # interface to serve as wrapper for nameDB
 class nameMap:
@@ -402,4 +414,47 @@ class nameMap:
 
         return None
 
+# interface to serve as wrapper for searchDB 
+class searches:
+    # get mapping for podcast name
+    @staticmethod
+    def add(query):
+        query = query.lower()
+        if query in searchDB["lib"]:
+            searchDB["lib"][query] += 1 
+        else:
+            searchDB["lib"][query] = 1 
 
+        searchDB["count"] += 1
+
+        # check if top needs to be updated
+        top = searchDB["top"]
+        # recount
+        top = [(searchDB["lib"][x[1]], x[1]) for x in top]
+        top.sort(key=(lambda x: x[0]))
+        keys = [x[1] for x in top]
+
+        if ((len(top) < 20 or top[0][0] < searchDB["lib"][query]) and
+            query not in keys):
+            top.append((searchDB["lib"][query], query))
+
+        searchDB["top"] = top
+
+        # save every 5 searches
+        if searchDB["count"] > 5:
+            searchDB["count"] = 0
+            try:
+                file = open("database/searches.json", "w")
+                file.write(json.dumps(searchDB))
+                file.close()
+            except:
+                pass
+
+    # add a new mapping
+    @staticmethod
+    def retrieve():
+        # check if top needs to be updated
+        top = searchDB["top"]
+        # recount
+        top.sort(key=(lambda x: x[0]), reverse=True)
+        return [x[1] for x in top]
