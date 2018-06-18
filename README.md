@@ -2,6 +2,8 @@
 
 Application for Capital One Software Engineering Summit (2018).
 
+[http://podcast.stevenshan.com/](http://podcast.stevenshan.com/)
+
 ## Features
 - Search for podcasts by keyword or by tag
 - Several options for sorting podcasts or episodes:
