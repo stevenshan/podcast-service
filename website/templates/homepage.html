@@ -39,6 +39,10 @@ Top 20 Podcasts
             </a>
         </div> 
     {% endfor %}
+
+    {% if topSearches|length == 0 %}
+        <h4>No Searches Found</h4>
+    {% endif %}
 </div>
 {% endblock %}
 

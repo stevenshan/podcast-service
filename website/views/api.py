@@ -472,7 +472,7 @@ class searches:
         searchDB["top"] = top
 
         # save every 5 searches
-        if searchDB["count"] > 5:
+        if searchDB["count"] >= 5:
             searchDB["count"] = 0
             try:
                 file = open("database/searches.json", "w")
