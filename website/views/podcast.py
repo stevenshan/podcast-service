@@ -1,16 +1,5 @@
 from base import *
 
-# get directory path from url
-def readURL(url):
-    matches = api.podcastPatWhole.findall(url)
-    if matches == None or len(matches) != 1:
-        return None
-
-    match = api.podcastPatBreak.findall(matches[0])
-    if len(match) != 0:
-        return match
-    return None
-
 #
 # Custom error to return a redirect
 #
@@ -30,6 +19,7 @@ class Redirect(Exception):
 
 class Episode(TemplateView):
     template = "episode.html"
+    url = ""
 
     # get podcast data from gpodder endpoint and then go
     # to feed of podcast and retrieve episodes list
@@ -39,7 +29,7 @@ class Episode(TemplateView):
 
         # get name of podcast being requested 
         url = request.build_absolute_uri('?')
-        urlParts = readURL(url)
+        urlParts = api.readURL(url)
         podcastName = urlParts[0]
 
         # get url of podcast
@@ -52,6 +42,8 @@ class Episode(TemplateView):
 
         if url == None:
             return redirect("/search?q=" + podcastName)
+
+        self.url = url
 
         # make api request to get podcast details
         podcastRequest = api.endpoints.podcast(url, headers)
@@ -90,12 +82,17 @@ class Episode(TemplateView):
             return [episodes[reqEpisode - 1]]
         raise Exception("redirect")
 
+    # give children classes change to add variables to context
+    def context(self, request, variables):
+        return variables 
+
     # return page after making request for podcast details 
     # and list of episodes from api and rss feed
     def get(self, request, **kwargs):
         try:
             variables = self.retrieveData(request)
             variables["auth"] = api.packAuth(request)
+            self.context(request, variables)
         except Redirect as redirectObj:
             return redirectObj.redirect
         return render(request, self.template, context=variables)
@@ -111,6 +108,25 @@ class Episodes(Episode):
 # podcast details page - only shows first 5 episodes
 class Podcast(Episodes):
     template = "podcast.html"
+
+    # add subscribe/unsubscribe to context
+    def context(self, request, variables):
+        subscribed = False
+        try:
+            auth = variables["auth"]
+            if not auth["loggedIn"]:
+                raise Exception("not subscribed")
+                
+            headers = api.genHeader(request)
+            subscriptions = json.loads(api.endpoints.subscriptions(
+                auth["username"], auth["sessionid"], 
+                auth["device"], headers))
+            urls = [x["url"] for x in subscriptions]
+            if self.url in urls:
+                subscribed = True
+        except Exception as e:
+            pass
+        variables["subscribed"] = subscribed 
 
     # override to only return first 5 to avoid clutter
     def episodeFilter(self, episodes, urlParts):

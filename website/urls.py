@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^devices/$', views.Devices.as_view()), # logout page 
     url(r'^dashboard/$', views.Dashboard.as_view()),
     url(r'^search/$', views.Search.as_view()), # search
+    url(r'^subscribe/[^/]*$', views.Subscribe.as_view()), # subscribe 
+    url(r'^unsubscribe/[^/]*$', views.Unsubscribe.as_view()), # unsubscribe 
     url(r'^podcast/[^/]*$', views.Podcast.as_view()), # podcast information
     url(r'^podcast/[^/]*/episodes$', views.Episodes.as_view()), # podcast episode list
     url(r'^podcast/[^/]*/episodes/[^/]*$', views.Episode.as_view()), # specific episode

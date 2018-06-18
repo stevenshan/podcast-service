@@ -19,4 +19,13 @@
 
 {# only used in episodes.html template #}
 {% block episodesOptions %}
+{% if auth.loggedIn %}
+<li>
+    {% if subscribed %}
+    <a href="/unsubscribe/{{ podcastName }}">Unsubscribe</a>
+    {% else %}
+    <a href="/subscribe/{{ podcastName }}">Subscribe</a>
+    {% endif %}
+</li>
+{% endif %}
 {% endblock %}

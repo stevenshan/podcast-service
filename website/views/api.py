@@ -14,6 +14,8 @@ import json
 # regex pattern to get name of podcast from url
 podcastPat = re.compile("\/podcast\/([^\/]+)$") # matches exactly one level after podcast
 podcastPatWhole = re.compile("\/podcast\/(.+)") # get everything after podcast
+subscribePatWhole = re.compile("\/subscribe\/(.+)") # get everything after podcast
+unsubscribePatWhole = re.compile("\/unsubscribe\/(.+)") # get everything after podcast
 podcastPatBreak = re.compile("[^\/]+") # split by delimeter /
 
 # regex pattern to get podcast feed url from gpodder html code
@@ -30,9 +32,11 @@ def safeRequest(url, params = {}, headers = {}, cookies = {}):
     except Exception as e:
         return None
 
-def safePOST(url, auth = (), headers = {}, cookies = {}):
+def safePOST(url, auth = (), headers = {}, cookies = {}, json = {}):
     try:
-        return requests.post(url, auth=auth, headers=headers, cookies=cookies)
+        return requests.post(
+            url, auth=auth, headers=headers, 
+            cookies=cookies, json = json)
     except:
         return None;
 
@@ -247,6 +251,24 @@ class OnlineEndpoints(OfflineEndpoints):
 
         return []
 
+    # Make a new subscription or remove a subscription
+    @staticmethod
+    def subscriptionChange(username, sessionid, device, headers, jsonData):
+        response = OnlineEndpoints.devices(username, sessionid, headers)
+
+        try:
+            response = json.loads(response)
+            deviceid = response[device]["id"]
+
+            request = safePOST(
+                HOST + "/api/2/subscriptions/" + username + "/" + deviceid + ".json",
+                cookies={"sessionid": sessionid},
+                json=jsonData,
+                headers=headers
+            )
+        except:
+            pass
+
 # change between OnlineEndpoints and OfflineEndpoints for testing
 # endpoints = OfflineEndpoints 
 endpoints = OnlineEndpoints
@@ -285,6 +307,17 @@ def genHeader(request):
     except:
         pass
     return header
+
+# get directory path from url
+def readURL(url, pattern = podcastPatWhole):
+    matches = pattern.findall(url)
+    if matches == None or len(matches) != 1:
+        return None
+
+    match = podcastPatBreak.findall(matches[0])
+    if len(match) != 0:
+        return match
+    return None
 
 ###########################################################
 # Database methods - maps podcast name to url
