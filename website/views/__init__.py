@@ -21,7 +21,11 @@ from devices import Devices
 # Dashboard screen - /dashboard
 from dashboard import Dashboard
 
+# Subscription actions
 from subscription import Subscribe, Unsubscribe
+
+# Suggestions endpoint
+from suggestions import Suggestions
 
 # import base for views in order to do initialization
 from base import *

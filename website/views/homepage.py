@@ -28,7 +28,8 @@ class HomePage(TemplateView):
 
         variables = ({
             "results": content,
-            "topSearches": api.searches.retrieve()
+            "topSearches": api.searches.retrieve(),
+            "auth": api.packAuth(request)
         })
 
         return render(request, 'homepage.html', context=variables)

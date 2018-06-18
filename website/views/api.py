@@ -11,6 +11,10 @@ import re # regular expressions
 from lxml import etree # XML parsing for episode feed
 import json
 
+###########################################################
+# Data extraction
+###########################################################
+
 # regex pattern to get name of podcast from url
 podcastPat = re.compile("\/podcast\/([^\/]+)$") # matches exactly one level after podcast
 podcastPatWhole = re.compile("\/podcast\/(.+)") # get everything after podcast
@@ -245,6 +249,16 @@ class OnlineEndpoints(OfflineEndpoints):
     def devices(username, sessionid, headers):
         request = safeRequest(
             HOST + "/api/2/devices/" + username + ".json",
+            cookies={"sessionid": sessionid},
+            headers=headers
+        )
+        return OnlineEndpoints.processRequest(request)
+
+    # Get list of suggested episodes
+    @staticmethod 
+    def suggestions(sessionid, headers):
+        request = safeRequest(
+            HOST + "/suggestions/20.json",
             cookies={"sessionid": sessionid},
             headers=headers
         )
