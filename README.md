@@ -12,8 +12,9 @@ Application for Capital One Software Engineering Summit (2018).
         - prioritize listening to podcasts that release episodes more frequently because missing just a few days could put you far behind on new epsiodes
     - for episodes: chronological
 - Several options for filtering podcasts or episodes such as setting minimum or maximum number of subscribers, and year episode was released
-- Front page with most frequently searched queries and most popular podcasts for exploring new podcasts
+- Explore page with most frequently searched queries, most popular podcasts, and podcasts by genre
 - Mobile friendly page so you can use any device to view the web app
+- Keyword extraction using Rake to generate keywords that can be used to find similar podcasts
 
 ## Code Structure
 
