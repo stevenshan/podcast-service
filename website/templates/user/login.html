@@ -1,12 +1,28 @@
+{# Page for user login #}
+
 {% extends 'user/base.html' %}
 
-{% block title %}Login{% endblock %}
-
+{# override content block to add login form #}
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
+<form action="/login/" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+
+    {# display error message if couldn't authenticate #}
+    {% if error %}
+    <div id="errorMesg">
+        Incorrect Username or Password
+    </div>
+    {% endif %}
+
+    <div class="inputWrapper">
+        <input type="text" class="inputText" required/>
+        <span class="floating-label">Username</span>
+    </div>
+    <div class="inputWrapper">
+        <input type="password" class="inputText" required/>
+        <span class="floating-label">Password</span>
+    </div>
+
+    <input type="submit" value="Login" id="submitButton">
+</form>
 {% endblock %}

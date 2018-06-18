@@ -1,15 +1,61 @@
-<html>    
-    <body>
-        <div class="page-header">
-            <h1><a href="/">test</a></h1>
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-                </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Podcast discovery and subscription manager">
+    <meta name="keywords" content="podcast search discover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+    <title>
+      {% block title %} 
+      Login
+      {% endblock %}
+    </title>
+    {% load static %}
+    <!-- Fonts -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> -->
+    <link href="{% static 'website/css/fonts/lato.css' %}" rel="stylesheet">
+    <link href="{% static 'website/css/fonts/material-fonts.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'website/css/user_auth.css' %}" rel="stylesheet">
+    <link href="{% static 'website/css/user_auth.mobile.css' %}" rel="stylesheet">
+
+    <!-- Extra Stylesheets imported by Django -->
+    {% block stylesheets %}
+    {% endblock %}
+
+  </head>
+  {% if error %}
+  <body class="haserror">
+  {% else %}
+  <body>
+  {% endif %}
+    <div id="wrapper">
+        <a id="title" href="/">
+            Podcasts
+        </a>
+        <div id="userBox">
+            <div id="modeSwitch">
+                {% if env == "login" %}
+                <a href="/login" class="active">
+                {% else %}
+                <a href="/login">
+                {% endif %}
+                    Login
+                </a>
+                {% if env == "register" %}
+                <a href="/register" class="active">
+                {% else %}
+                <a href="/register">
+                {% endif %}
+                    Register
+                </a>
             </div>
-        </div>
-    </body>
+
+            {% block content %}
+            {% endblock %}
+       </div>
+    </div>
+  </body>
 </html>

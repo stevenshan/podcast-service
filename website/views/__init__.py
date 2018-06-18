@@ -12,6 +12,9 @@ from search import Search
 # Episode - show details of specific episode
 from podcast import Podcast, Episodes, Episode
 
+# Login screen - /login
+from user_auth import Login, Register
+
 # User dashboard as front page for logged in users
 from base import *
 

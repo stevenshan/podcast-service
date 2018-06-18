@@ -1,0 +1,244 @@
+/* 
+Stylesheet for login and registration screens
+
+Note: some styles are set to display: none here but made
+visible by the mobile stylesheet user_auth.mobile.css
+*/
+
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #79a7ea;
+}
+
+/*
+===========================================
+General - mostly stuff to get rid of default styling
+===========================================
+*/
+
+/* copied from template.css */
+
+a {
+    text-decoration: inherit;
+    color: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+input {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+* {
+    box-sizing: border-box;
+    outline: none;
+    /* remove background on mobile tap */
+    -webkit-tap-highlight-color: transparent;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+li {
+    display: inline-block;
+}
+
+.inputToggle {
+    display: none;
+}
+
+/*
+===========================================
+Title - link back to homepage
+===========================================
+*/
+
+#title {
+    position: absolute; 
+    display: block;
+    left: 0px;
+    right: 0px;
+    top: -80px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: bolder;
+}
+
+/*
+===========================================
+Wrapper - center boxes on screen
+===========================================
+*/
+
+#wrapper {
+    width: 500px;
+    height: 600px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/*
+-------------------------------------------
+User box - login/registration screen
+-------------------------------------------
+*/
+
+#wrapper #userBox {
+    margin-left: 75px;
+    margin-right: 75px;
+    text-align: center;
+}
+
+#wrapper #userBox #modeSwitch {
+    margin-top: 70px;
+    font-size: 0px;
+}
+
+#wrapper #userBox #modeSwitch > a {
+    padding: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    border-bottom: 2px solid #d3d3d3;
+    color: #d3d3d3;
+    width: 120px;
+    display: inline-block;
+}
+
+#wrapper #userBox #modeSwitch > a.active {
+    color: #79a7ea;
+    border-bottom: 2px solid #79a7ea;
+}
+
+#wrapper #userBox form {
+    display: block;
+    margin-top: 50px;
+}
+
+/*
+ * Styling for text input with floating label
+ */
+
+#wrapper #userBox .inputWrapper {
+    position: relative;
+    margin-top: 40px;
+}
+
+#wrapper #userBox .inputWrapper .inputText {
+    width: 100%;
+    padding: 0px 10px;
+    padding-top: 35px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #d3d3d3;
+    font-size: 16px;
+}
+
+#wrapper #userBox .inputWrapper input:focus ~ .floating-label,
+#wrapper #userBox .inputWrapper input:not(:focus):valid ~ .floating-label {
+    top: 8px;
+    bottom: 10px ;
+    left: 10px;
+    font-size: 13px;
+    opacity: 1;
+    color: #79a7ea;
+}
+
+#wrapper #userBox .inputWrapper input:focus,
+#wrapper #userBox .inputWrapper input:not(:focus):valid {
+    border-bottom: 3px solid #79a7ea;
+}
+
+
+#wrapper #userBox .inputWrapper .floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 35px;
+    color: #d3d3d3;
+    transition: 0.2s ease all;
+}
+
+/*
+ * Styling for rest of form elements
+ */
+
+#submitButton {
+    background: #6cc45e; 
+    height: 54px;
+    line-height: 54px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    width: 200px;
+    border-radius: 27px;
+    cursor: pointer;
+    margin-top: 80px;
+}
+
+#submitButton:hover {
+    background: #59af4b; 
+}
+
+/*
+===========================================
+Register Page
+===========================================
+*/
+
+#registerMessage {
+    color: #828282;
+    margin: 0px;
+    margin-top: 150px;
+    padding: 0px;
+    display: block;
+    font-size: 20px;
+}
+
+#registerMessage a {
+    text-decoration: underline;
+}
+
+/*
+===========================================
+Error Message
+===========================================
+*/
+
+body.haserror #wrapper #userBox #modeSwitch {
+    margin-top: 40px;
+}
+
+body.haserror #wrapper #userBox form {
+    margin-top: 30px;
+}
+
+#errorMesg {
+    padding: 20px;
+    border: 1px solid #d86d69;
+    border-radius: 2px;
+}
+
+#wrapper #userBox #errorMesg + .inputWrapper {
+    margin-top: 20px;
+}
+

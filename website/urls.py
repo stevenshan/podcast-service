@@ -3,7 +3,8 @@ from website import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    url(r'^login/$', auth_views.login, {'template_name': 'user/login.html'}, name='login'),
+    url(r'^login/$', views.Login.as_view()), # login screen
+    url(r'^register/$', views.Register.as_view()), # login screen
     url(r'^logout/$', auth_views.logout, \
             {'template_name': 'user/logout.html', 'next_page': '/login'}, \
             name='logout'),
