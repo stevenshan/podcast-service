@@ -9,6 +9,7 @@ import pickledb
 
 import re # regular expressions
 from lxml import etree # XML parsing for episode feed
+import json
 
 # regex pattern to get name of podcast from url
 podcastPat = re.compile("\/podcast\/([^\/]+)$") # matches exactly one level after podcast
@@ -225,6 +226,26 @@ class OnlineEndpoints(OfflineEndpoints):
         )
         return OnlineEndpoints.processRequest(request)
 
+    # Retrieve list of subscriptions from /subscriptions endpoint
+    @staticmethod
+    def subscriptions(username, sessionid, device, headers):
+        response = OnlineEndpoints.devices(username, sessionid, headers)
+
+        try:
+            response = json.loads(response)
+            deviceid = response[device]["id"]
+
+            request = safeRequest(
+                HOST + "/subscriptions/" + username + ".json",
+                cookies={"sessionid": sessionid},
+                params={"deviceid": deviceid},
+                headers=headers
+            )
+            return OnlineEndpoints.processRequest(request)
+        except:
+            pass
+
+        return []
 
 # change between OnlineEndpoints and OfflineEndpoints for testing
 # endpoints = OfflineEndpoints 
@@ -238,7 +259,9 @@ endpoints = OnlineEndpoints
 def packAuth(request):
     package = ({
         "loggedIn": False,
-        "username": ""
+        "username": "",
+        "device": 0,
+        "sessionid": ""
     })
 
     package["loggedIn"] = endpoints.loggedIn(request)
@@ -246,6 +269,7 @@ def packAuth(request):
         try:
             package["username"] = request.session["username"]
             package["device"] = request.session["device"]
+            package["sessionid"] = request.session["sessionid"]
         except Exception as e:
             pass
 

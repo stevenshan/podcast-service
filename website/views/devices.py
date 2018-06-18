@@ -29,8 +29,18 @@ class Devices(TemplateView):
 
         devices = getDevices(request)
 
+        auth = api.packAuth(request)
+
+        # make sure device is in valid range
+        if (auth["device"] < 0 or auth["device"] >= len(devices)):
+            auth["device"] = 0
+            try:
+                request.session["device"] = 0
+            except:
+                pass
+
         variables = ({
-            "auth": api.packAuth(request),
+            "auth": auth,
             "env": "none",
             "devices": devices
         })

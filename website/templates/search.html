@@ -9,9 +9,11 @@
 {% endblock %}
 
 {% block scripts %}
+{% block defaultSearchScript %}
 <script type="text/javascript">
     var defaultSearchValue = "{{ query }}";
 </script>
+{% endblock %}
 {% load static %}
 <script src="{% static 'website/js/search.js' %}" type="text/javascript"></script>
 {% endblock %}
@@ -22,7 +24,9 @@ Podcast Search - {{ query }}
 
 {% block content %}
 <div id="searchResultMessage">
+{% block message %}
 Search results for <strong>{{ query }}</strong>:
+{% endblock %}
 </div>
 <div id="searchResultHeader">
     <div id="podcastLabel">Podcast</div>
@@ -62,6 +66,7 @@ Search results for <strong>{{ query }}</strong>:
         {% endfor %}
     {% else %}
         <div id="noResultMessage">
+            {% block noResultMessage %}
             <span>Your search did not return any results.</span>
             <div>
                 <span>Suggestions:</span>
@@ -73,6 +78,7 @@ Search results for <strong>{{ query }}</strong>:
                     <li>Explore podcasts by tag</li>
                 </ul>
             </div>
+            {% endblock %}
         </div>
     {% endif %}
 

@@ -37,6 +37,13 @@
         </tbody>
     </table>
 
+    {% if devices|length == 0 %}
+    <div id="errorMesg">
+        No Devices Found
+    </div>
+ 
+    {% endif %}
+
     <input type="submit" value="Update" id="submitButton">
 </form>
 

@@ -44,3 +44,7 @@ Devices List Table
 #submitButton {
     margin-top: 50px;
 }
+
+#errorMesg {
+    margin-top: 30px;
+}

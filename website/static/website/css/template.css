@@ -522,7 +522,7 @@ Top Sidebar - upper section with only 2 buttons
     margin-bottom: 20px;
 }
 
-#main #sidebar #topSidebar div {
+#main #sidebar #topSidebar > * {
     display: inline-block;
     width: 45px;
     height: 45px;
@@ -548,7 +548,7 @@ Top Sidebar - upper section with only 2 buttons
 
 /* Icon hover action */
 
-#main #sidebar #topSidebar div:hover {
+#main #sidebar #topSidebar > *:hover {
     background-color: #ffffff;
 }
 

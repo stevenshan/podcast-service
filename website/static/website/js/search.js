@@ -169,8 +169,8 @@ $(function(){
         }
     }
 
-    $("#minSubs").focusout(checkRange);
-    $("#maxSubs").focusout(checkRange);
+    $("#minSubs").change(checkRange);
+    $("#maxSubs").change(checkRange);
 
 });
 

@@ -1,12 +1,25 @@
-test dashboard
+{# Page for user dashboard #}
 
-{% if user.is_authenticated %}
-    {{ user.username }}
-{% else %}
-    Not logged in.
-{% endif %}
+{% extends 'search.html' %}
 
-{% if auth.loggedIn %}
-{{ auth.username }}
-{% endif %}
+{% block defaultSearchScript %}
+{% endblock %}
 
+{% block title %}
+Subscriptions
+{% endblock %}
+
+{% block message %}
+User Subscriptions
+{% endblock %}
+
+{% block noResultMessage %}
+<span>No subscriptions found</span>
+<div>
+    <span>Suggestions:</span>
+    <ul>
+        <li>Make sure you are using the correct device</li>
+        <li>Go explore the podcasts page</li>
+    </ul>
+</div>
+{% endblock %}
