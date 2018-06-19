@@ -2,19 +2,19 @@
 Stylesheet for home page
 */
 
-#topSearches h3 {
+.menuList h3 {
     padding: 0px;
     margin: 0px;
     margin-bottom: 10px;
     font-size: 18px;
 }
 
-#topSearches > div {
+.menuList > div {
     font-size: 17px;    
     margin: 5px 0px;
 }
 
-#topSearches > div > a:hover {
+.menuList > div > a:hover {
     text-decoration: underline;
 }
 

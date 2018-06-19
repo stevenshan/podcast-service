@@ -30,7 +30,21 @@ Top 20 Podcasts
 {% endblock %}
 
 {% block sidebar %}
-<div class="menuBox" id="topSearches">
+<div class="menuBox menuList">
+    <h3>Top Genres</h3>
+    {% for genre in topGenres %}
+        <div>
+            <a href="/tag?q={{ genre.tag }}">
+                {{ genre.title }}
+            </a>
+        </div> 
+    {% endfor %}
+
+    {% if topGenres|length == 0 %}
+        <h4>No Genres Found</h4>
+    {% endif %}
+</div>
+<div class="menuBox menuList">
     <h3>Top Searches</h3>
     {% for search in topSearches %}
         <div>

@@ -46,6 +46,7 @@ def safePOST(url, auth = (), headers = {}, cookies = {}, json = {}):
     except:
         return None;
 
+# convert string to date or return epoch if string is invalid
 def toDate(dateString):
     try:
         return parseDate(dateString)
@@ -274,7 +275,6 @@ class OnlineEndpoints(OfflineEndpoints):
         try:
             response = json.loads(response)
             deviceid = response[device]["id"]
-            print(deviceid)
 
             request = safeRequest(
                 HOST + "/subscriptions/" + username + ".json",
@@ -305,6 +305,15 @@ class OnlineEndpoints(OfflineEndpoints):
             )
         except:
             pass
+
+    # Get top genres from Directory API
+    @staticmethod
+    def getGenres(headers, count = 20):
+        request = safeRequest(
+            HOST + "/api/2/tags/" + str(count) + ".json",
+            headers=headers
+        )
+        return OnlineEndpoints.processRequest(request)
 
 # change between OnlineEndpoints and OfflineEndpoints for testing
 # endpoints = OfflineEndpoints 
@@ -472,7 +481,7 @@ class searches:
         searchDB["top"] = top
 
         # save every 5 searches
-        if searchDB["count"] >= 5:
+        if searchDB["count"] >= 1:
             searchDB["count"] = 0
             try:
                 file = open("database/searches.json", "w")
@@ -484,8 +493,6 @@ class searches:
     # add a new mapping
     @staticmethod
     def retrieve():
-        # check if top needs to be updated
         top = searchDB["top"]
-        # recount
         top.sort(key=(lambda x: x[0]), reverse=True)
         return [x[1] for x in top]

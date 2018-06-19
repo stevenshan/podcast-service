@@ -26,9 +26,17 @@ class HomePage(TemplateView):
                 name = ""
             podcast["idName"] = name
 
+        # get top genres
+        try:
+            genresRaw = api.endpoints.getGenres(headers)
+            genreList = json.loads(genresRaw)
+        except:
+            genreList = []
+
         variables = ({
             "results": content,
             "topSearches": api.searches.retrieve(),
+            "topGenres": genreList,
             "auth": api.packAuth(request)
         })
 

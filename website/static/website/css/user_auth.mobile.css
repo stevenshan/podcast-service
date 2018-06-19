@@ -26,6 +26,7 @@ styling for response design and resizing
     #wrapper {
         width: 350px;
         height: 500px;
+        top: 40px;
     }
 
     /*
