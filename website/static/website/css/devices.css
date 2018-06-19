@@ -34,12 +34,27 @@ Devices List Table
 }
 
 #devicesTable td {
-    padding: 10px 0px;
+    padding: 10px;
 }
 
 #devicesTable .inputCell {
     padding-left: 15px;
 }
+
+/*
+-------------------------------------------
+Column Width
+-------------------------------------------
+*/
+
+#deviceCol {
+    width: 270px;
+}
+
+#subscriptionsCol {
+    width: 120px;
+}
+
 
 /*
 -------------------------------------------
