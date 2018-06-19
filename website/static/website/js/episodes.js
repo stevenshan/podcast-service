@@ -1,5 +1,6 @@
 /*
  * Javascript code for Podcast, Episode, and Episodes List pages
+ * mainly for filtering or sorting episodes
  */
 
 /*

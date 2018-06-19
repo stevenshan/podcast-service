@@ -7,8 +7,8 @@ urlpatterns = [
     url(r'^register/$', views.Register.as_view()), # register screen
     url(r'^logout/$', views.Logout.as_view()), # logout page 
     url(r'^devices/$', views.Devices.as_view()), # logout page 
-    url(r'^dashboard/$', views.Dashboard.as_view()),
-    url(r'^suggestions/$', views.Suggestions.as_view()),
+    url(r'^dashboard/$', views.Dashboard.as_view()), # dashboard/subscriptions
+    url(r'^suggestions/$', views.Suggestions.as_view()), # suggestions page
     url(r'^search/$', views.Search.as_view()), # search
     url(r'^tag/$', views.Tags.as_view()), # tag search
     url(r'^subscribe/[^/]*$', views.Subscribe.as_view()), # subscribe 

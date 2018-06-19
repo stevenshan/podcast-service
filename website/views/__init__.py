@@ -1,6 +1,10 @@
 # central module for controlling views of website
 # code for views are in separate files
 
+###########################################################
+# Views
+###########################################################
+
 # index page - /
 from homepage import HomePage
 
@@ -27,12 +31,12 @@ from subscription import Subscribe, Unsubscribe
 # Suggestions endpoint
 from suggestions import Suggestions
 
-# import base for views in order to do initialization
-from base import *
-
 ###########################################################
 # Initialization - stuff to do when server starts
 ###########################################################
+
+# import base for views in order to do initialization
+from base import *
 
 # initialize PickleDB for mapping podcast names to url
 api.nameDB = api.pickledb.load("database/podcastMapping.db", False)

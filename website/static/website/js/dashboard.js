@@ -1,5 +1,5 @@
 /*
- * Javascript code for search results page
+ * Javascript code for extra sorting options on dashboard page
  */
 
 /*

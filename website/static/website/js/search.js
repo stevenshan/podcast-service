@@ -1,5 +1,6 @@
 /*
  * Javascript code for search results page
+ * mainly for filtering and sorting list of podcasts
  */
 
 /*

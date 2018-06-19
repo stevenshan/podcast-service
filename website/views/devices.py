@@ -20,6 +20,7 @@ def getDevices(request):
 class Devices(TemplateView):
     template = "user/devices.html"
 
+    # render page showing options for devices to choose
     def get(self, request, **kwargs):
         loggedIn = api.endpoints.loggedIn(request)
 
@@ -47,6 +48,7 @@ class Devices(TemplateView):
 
         return render(request, self.template, context=variables)
 
+    # receive post request to change active device
     def post(self, request, **kwargs):
 
         headers = api.genHeader(request)
@@ -55,7 +57,7 @@ class Devices(TemplateView):
 
         loggedIn = api.endpoints.loggedIn(request)
 
-        # must be logged in to view devices
+        # must be logged in to change active device
         if not loggedIn:
             return redirect("/login")
 
