@@ -542,8 +542,8 @@ Top Sidebar - upper section with only 2 buttons
     background-image: url("../imgs/dashboard.svg");
 }
 
-#main #sidebar #topSidebar #notificationLink {
-    background-image: url("../imgs/notification.svg");
+#main #sidebar #topSidebar #suggestionLink {
+    background-image: url("../imgs/lightbulb.svg");
 }
 
 /* Icon hover action */
@@ -556,8 +556,8 @@ Top Sidebar - upper section with only 2 buttons
     background-image: url("../imgs/dashboard.hover.svg");
 }
 
-#main #sidebar #topSidebar #notificationLink:hover {
-    background-image: url("../imgs/notification.hover.svg");
+#main #sidebar #topSidebar #suggestionLink:hover {
+    background-image: url("../imgs/lightbulb.hover.svg");
 }
 
 /*
