@@ -15,6 +15,7 @@
         {{ podcast.description }}
     </p>
 </section>
+{% if keywords|length > 0 %}
 <section class="contentSection" id="podcastTags">
     <div class="contentTitle">Tags</div>
     <p>
@@ -25,6 +26,7 @@
         {% endfor %}
     </p>
 </section>
+{% endif %}
 {% endblock %}
 
 {# only used in episodes.html template #}
