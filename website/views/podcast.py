@@ -30,6 +30,11 @@ class Episode(TemplateView):
         # get name of podcast being requested 
         fullURL = request.build_absolute_uri('?')
         urlParts = api.readURL(fullURL)
+
+        # if invalid url (such as missing podcast name)
+        if len(urlParts) == 0:
+            return redirect("/")
+
         podcastName = urlParts[0]
 
         # get url of podcast
