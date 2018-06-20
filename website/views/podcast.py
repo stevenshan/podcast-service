@@ -32,7 +32,7 @@ class Episode(TemplateView):
         urlParts = api.readURL(fullURL)
 
         # if invalid url (such as missing podcast name)
-        if len(urlParts) == 0:
+        if urlParts == None or len(urlParts) == 0:
             return redirect("/")
 
         podcastName = urlParts[0]
