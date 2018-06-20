@@ -12,8 +12,6 @@ badWords = None # list of bad words for filtering
 # Initialization - stuff to do when server starts
 ###########################################################
 
-# import base for views in order to do initialization
-from base import *
 import redis
 from base64 import b64decode
 import re

@@ -319,10 +319,10 @@ class OnlineEndpoints(OfflineEndpoints):
 endpoints = OnlineEndpoints
 
 ###########################################################
-# Shared Methods 
+# Shared Methods - generic; not particularly related to API
 ###########################################################
 
-# get authentication information to send to template for render
+# get standardized object storing user information
 def packAuth(request):
     package = ({
         "loggedIn": False,
@@ -342,7 +342,7 @@ def packAuth(request):
 
     return package
 
-# returns generic header
+# returns generic header containing user agent
 def genHeader(request):
     header = {}
     try:
@@ -364,7 +364,7 @@ def readURL(url, pattern = podcastPatWhole):
         return match
     return None
 
-# returns a list of keyword phrases
+# returns a list of keyword phrases using Rake NLP
 def keywords(text, phraseLen = 2):
     phrases = []
     try:
