@@ -15,13 +15,16 @@ Application for Capital One Software Engineering Summit (2018).
 - Explore page with most frequently searched queries, most popular podcasts, and podcasts by genre
 - Mobile friendly page so you can use any device to view the web app
 - Keyword extraction using Rake to generate keywords that can be used to find similar podcasts
+- Profanity detection on Top Searches to prevent inappropriate searches from showing up publicly
 
 ## Code Structure
 
 I built the web app using Django. The project related code is in the `website` app. 
 
 - The `website/views` module contains the Python backend that interacts with the gPodder API and processes the response to be rendered by the templates
-    - `website/views/api.py` contains the interface for making API requests, a simple database interface for keeping key-value pairs from podcast names to URLs, and various helper functions.
+    - `website/views/api.py` contains the interface for making API requests using the Python requests library for GET and POST methods
+    - `website/initialize.py` contains a simple database interface for keeping key-value pairs from podcast names to URLs and keeping track of top searches using a Redis database
+    - `website/common.py` cotains several commonly used methods such as generating a user-agent header for HTTP requests
     - `website/views/base.py` imports all of the modules needed to create a View
     - `website/views/__init__.py` imports all of the views that are referenced in `website/urls.py` to create each page of the website
     - the other Python files are Views corresponding to different pages of the website
