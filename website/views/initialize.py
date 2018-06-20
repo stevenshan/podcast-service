@@ -1,3 +1,5 @@
+from common import *
+
 ###########################################################
 # Fields 
 ###########################################################
@@ -157,6 +159,5 @@ class searches:
     @staticmethod
     def retrieve():
         top = [searches.getJSON(x) for x in searchDBTop.keys()]
-        print(top)
         top.sort(key=(lambda x: x[0]), reverse=True)
         return [x[1] for x in top]

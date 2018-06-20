@@ -33,7 +33,8 @@ class Search(TemplateView):
                     podcast["mygpo_link"],
                     podcast["url"]
                 )
-            except:
+            except Exception as e:
+                print(e)
                 name = ""
             podcast["idName"] = name
 
