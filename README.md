@@ -30,6 +30,12 @@ I built the web app using Django. The project related code is in the `website` a
     - the other Python files are Views corresponding to different pages of the website
 - The `website/templates` and `website/static` directories contain the templates and the associated formatting
 
+### Python Modules
+List of Python modules used:
+
+- Redis (to store search queries and podcast names)
+- RAKE (for keyword extraction to generate related tags)
+
 ## Challenges
 - the data from the gPodder API is occassionally outdated or has diverged from the RSS feed of the podcast so instead of using the Episode Data endpoint I scraped all of the data directly from the RSS feed
 - this was my first time using Django so there's probably areas where the code was more complicated than it needed to be
