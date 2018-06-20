@@ -4,14 +4,13 @@ from dateutil.parser import parse as parseDate # convert date string to object
 from datetime import datetime
 import requests # for making requests to api endpoints
 
-# used for database mapping podcast name to url
-import pickledb
-
 import re # regular expressions
 from lxml import etree # XML parsing for episode feed
 import json
 
 from rake_nltk import Rake # for keyword extraction
+
+from initialize import nameMap, searches
 
 ###########################################################
 # Data extraction
@@ -377,109 +376,3 @@ def keywords(text, phraseLen = 2):
         pass
     return phrases
 
-###########################################################
-# Database methods - maps podcast name to url
-###########################################################
-
-
-# gets set by __init__.py to actual database
-nameDB = None # to map podcast name to url
-searchDB = {"top": [], "lib": {}, "count": 0}
-
-# interface to serve as wrapper for nameDB
-class nameMap:
-    # retrieve name given mygpo_link
-    @staticmethod
-    def getNameFromGPodderURL(url):
-        name = podcastPat.findall(url)
-        try:
-            return name[0]
-        except:
-            return None
-
-    # get mapping for podcast name
-    @staticmethod
-    def lookup(name):
-        request = nameDB.get(name)
-        return request
-
-    # add a new mapping
-    @staticmethod
-    def add(gPodderName, url):
-        nameDB.set(gPodderName, url)
-
-    # check if a mapping already exists and adds it if it doesn't
-    # returns gPodderName
-    # combines getNameFromGPodderURL with add
-    @staticmethod
-    def checkout(gPodderURL, url):
-        gPodderName = nameMap.getNameFromGPodderURL(gPodderURL)
-        if gPodderName != None and nameMap.lookup(gPodderName) == None:
-            nameMap.add(gPodderName, url)
-        return gPodderName
-        
-    # go to gPodder website to try to get podcast feed url
-    @staticmethod
-    def reverseLookup(gPodderName, headers):
-        gPodderURL = HOST + "/podcast/" + gPodderName
-        request = safeRequest(gPodderURL, headers=headers)
-        content = OnlineEndpoints.processRequest(request)
-
-        if content == None:
-            return None
-
-        matches = gPodderReverse.findall(content)
-
-        if len(matches) != 1:
-            return None
-        else:
-            match = matches[0]
-
-        if endpoints.podcast(match, headers) != None:
-            nameMap.checkout(gPodderURL, match)
-            return match
-
-        return None
-
-# interface to serve as wrapper for searchDB 
-class searches:
-    # get mapping for podcast name
-    @staticmethod
-    def add(query):
-        query = query.lower()
-        if query in searchDB["lib"]:
-            searchDB["lib"][query] += 1 
-        else:
-            searchDB["lib"][query] = 1 
-
-        searchDB["count"] += 1
-
-        # check if top needs to be updated
-        top = searchDB["top"]
-        # recount
-        top = [(searchDB["lib"][x[1]], x[1]) for x in top]
-        top.sort(key=(lambda x: x[0]))
-        keys = [x[1] for x in top]
-
-        if ((len(top) < 20 or top[0][0] < searchDB["lib"][query]) and
-            query not in keys):
-            top.append((searchDB["lib"][query], query))
-
-        searchDB["top"] = top
-
-        # save every 5 searches
-        if searchDB["count"] >= 1:
-            searchDB["count"] = 0
-            try:
-                file = open("database/searches.json", "w")
-                file.write(json.dumps(searchDB))
-                file.close()
-            except:
-                pass
-
-    # add a new mapping
-    @staticmethod
-    def retrieve():
-        top = searchDB["top"]
-        top.sort(key=(lambda x: x[0]), reverse=True)
-        return [x[1] for x in top]
