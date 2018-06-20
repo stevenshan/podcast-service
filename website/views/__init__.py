@@ -37,9 +37,10 @@ from suggestions import Suggestions
 
 # import base for views in order to do initialization
 from base import *
+import redis
 
 # initialize PickleDB for mapping podcast names to url
-api.nameDB = api.pickledb.load("database/podcastMapping.db", False)
+api.nameDB = redis.StrictRedis(host="localhost", port=6379, db=0)
 
 # initialize DB for keeping track of searches
 try:

@@ -373,29 +373,17 @@ def keywords(text, phraseLen = 2):
         r = Rake(max_length=phraseLen, punctuations=ignore)
         r.extract_keywords_from_text(text)
         phrases = r.get_ranked_phrases()[:20]
-    except Exception as e:
-        print(e)
+    except:
         pass
     return phrases
-
 
 ###########################################################
 # Database methods - maps podcast name to url
 ###########################################################
 
-# dummy pickledb database fallback
-class DummyDB:
-    def set(this, key, value):
-        return True
-
-    def get(this, key):
-        return None
-
-    def dump(this):
-        pass
 
 # gets set by __init__.py to actual database
-nameDB = DummyDB()
+nameDB = None # to map podcast name to url
 searchDB = {"top": [], "lib": {}, "count": 0}
 
 # interface to serve as wrapper for nameDB
@@ -419,7 +407,6 @@ class nameMap:
     @staticmethod
     def add(gPodderName, url):
         nameDB.set(gPodderName, url)
-        nameDB.dump()
 
     # check if a mapping already exists and adds it if it doesn't
     # returns gPodderName

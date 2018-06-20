@@ -28,8 +28,8 @@ class Episode(TemplateView):
         headers = api.genHeader(request)
 
         # get name of podcast being requested 
-        url = request.build_absolute_uri('?')
-        urlParts = api.readURL(url)
+        fullURL = request.build_absolute_uri('?')
+        urlParts = api.readURL(fullURL)
         podcastName = urlParts[0]
 
         # get url of podcast
@@ -41,7 +41,7 @@ class Episode(TemplateView):
             url = api.nameMap.reverseLookup(podcastName, headers)
 
         if url == None:
-            return redirect("/search?q=" + podcastName)
+            raise Redirect(redirect("/search?q=" + podcastName))
 
         self.url = url
 
@@ -51,6 +51,10 @@ class Episode(TemplateView):
         # parse podcast details to json
         try:
             content = json.loads(podcastRequest)
+            if content["logo_url"] == None and content["scaled_logo_url"] == None:
+                content["logo_url"] = "http://bestsellerexperiment.com/wp-content/uploads/2016/10/itunes-podcast-app-logo-square-220x220.png"
+            elif content["logo_url"] == None:
+                content["logo_url"] = content["scaled_logo_url"]
         except Exception as e:
             content = []
 
@@ -140,10 +144,10 @@ class Podcast(Episodes):
             for episode in variables["episodes"]:
                 text += (episode["title"] + " " +
                     episode["description"] + " ")
+            variables["keywords"] = api.keywords(text, 1)[:20]
+            variables["keywords"].sort(key=lambda x: len(x), reverse=True)
         except:
             pass
-        variables["keywords"] = api.keywords(text, 1)[:20]
-        variables["keywords"].sort(key=lambda x: len(x), reverse=True)
 
     # override to only return first 5 to avoid clutter
     def episodeFilter(self, episodes, urlParts):
