@@ -1,4 +1,4 @@
-from base import *
+from .base import *
 
 # access devices api endpoint
 def getDevices(request):

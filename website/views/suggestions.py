@@ -1,7 +1,7 @@
-from base import *
+from .base import *
 
 # import function to get list of subscriptions
-from dashboard import getSubs
+from .dashboard import getSubs
 
 # home page showing top group of podcasts
 class Suggestions(TemplateView):

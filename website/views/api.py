@@ -10,10 +10,10 @@ from lxml import etree # XML parsing for episode feed
 import json
 
 # database wrappers
-from initialize import nameMap, searches
+from .initialize import nameMap, searches
 
 # commonly used functions or regex patterns
-from common import *
+from .common import *
 
 ###########################################################
 # General Helpers

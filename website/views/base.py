@@ -13,7 +13,6 @@ from django.contrib.auth.models import Group
 import requests # to make http request to api
 
 # contains settings for api connection and methods for endpoints
-import api
+from . import api
 
 import json # parse api response
-

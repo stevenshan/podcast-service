@@ -1,4 +1,4 @@
-from base import *
+from .base import *
 
 # get podcast subscription list
 def getSubs(auth, headers, func = None):

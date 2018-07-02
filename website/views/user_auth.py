@@ -1,4 +1,4 @@
-from base import *
+from .base import *
 
 class UserView(TemplateView):
     template = "template.html"

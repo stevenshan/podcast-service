@@ -1,4 +1,4 @@
-from base import *
+from .base import *
 
 # search page for podcasts - /search
 class Search(TemplateView):

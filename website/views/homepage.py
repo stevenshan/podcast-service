@@ -1,4 +1,4 @@
-from base import *
+from .base import *
 
 # home page showing top group of podcasts
 class HomePage(TemplateView):
