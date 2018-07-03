@@ -29,7 +29,7 @@ searchDBTop = redis.StrictRedis(host="localhost", port=6379, db=2)
 # get list of bad words
 try:
     # decode bad words file
-    badWordsFile = b64decode(open('lib/bad_words.txt', 'r').read())
+    badWordsFile = str(b64decode(open('lib/bad_words.txt', 'r').read()))
     # split file by lines
     badWordsFile = [x for x in badWordsFile.split("\n") if x != ""]
 
@@ -38,7 +38,8 @@ try:
     badWords = '(%s)' %'|'.join(badWords)
     badWords = re.compile(badWords, re.IGNORECASE)
 except:
-    pass
+    # fallback regex expression
+    badWords = re.compile("$a")
 
 ###########################################################
 # Database methods - maps podcast name to url
