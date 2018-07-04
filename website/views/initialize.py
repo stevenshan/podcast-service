@@ -1,4 +1,5 @@
 from .common import *
+import os # to get environment variables
 
 ###########################################################
 # Fields 
@@ -7,8 +8,15 @@ from .common import *
 # gets set by __init__.py to actual database
 nameDB = None # to map podcast name to url
 searchDB = None # to keep track of all searches
-searchDBTop = None # to keep track of top searches
 badWords = None # list of bad words for filtering
+
+###########################################################
+# Helper
+###########################################################
+
+def redisKeyEq(x, value):
+    x = str(x)
+    return x[:x.find(":")] == str(value)
 
 ###########################################################
 # Initialization - stuff to do when server starts
@@ -19,12 +27,14 @@ from base64 import b64decode
 import re
 import json
 
+# get Heroku REDIS config url
+redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
+
 # initialize DB connection for mapping podcast names to url
-nameDB = redis.StrictRedis(host="localhost", port=6379, db=0)
+nameDB = redis.from_url(redis_url, db=0)
 
 # initialize DB connection for keeping track of searches
-searchDB = redis.StrictRedis(host="localhost", port=6379, db=1)
-searchDBTop = redis.StrictRedis(host="localhost", port=6379, db=2)
+searchDB = redis.from_url(redis_url, db=1)
 
 # get list of bad words
 try:
@@ -32,14 +42,14 @@ try:
     badWordsFile = str(b64decode(open('lib/bad_words.txt', 'r').read()))
     # split file by lines
     badWordsFile = [x for x in badWordsFile.split("\n") if x != ""]
-
+    
     # process file
     badWords = set(line.strip('\n') for line in badWordsFile)
     badWords = '(%s)' %'|'.join(badWords)
     badWords = re.compile(badWords, re.IGNORECASE)
 except:
-    # fallback regex expression
-    badWords = re.compile("$a")
+    # fallback impossible regex expression
+    badWords = re.compile("$a")    
 
 ###########################################################
 # Database methods - maps podcast name to url
@@ -105,7 +115,7 @@ class searches:
     # get item from redis database as json
     @staticmethod
     def getJSON(x):
-        return json.loads(searchDBTop.get(x))
+        return json.loads(searchDB.get("top:" + str(x)))
 
     @staticmethod
     def filter(query):
@@ -123,19 +133,20 @@ class searches:
         query = query[:25] # limit length of query
 
         # helper method for interacting with database
-        getInt = lambda x: int(searchDB.get(x))
-        increment = lambda x: searchDB.set(x, getInt(x) + 1)
+        getInt = lambda x: int(searchDB.get("index:" + str(x)))
+        increment = lambda x: searchDB.set("index:" + str(x), getInt(x) + 1)
 
         # retrieve stuff from database
-        libKeys = searchDB.keys()
+        libKeys = [x for x in searchDB.keys() if redisKeyEq(x, "index")]
 
-        top = [searches.getJSON(x) for x in searchDBTop.keys()]
+        top = [searches.getJSON(x) for x in searchDB.keys()
+            if redisKeyEq(x, "top")]
 
         query = query.lower()
         if query in libKeys:
             increment(query)
         else:
-            searchDB.set(query, 1)
+            searchDB.set("index:" + str(query), 1)
         queryVal = getInt(query)
 
         # recount top searches
@@ -154,11 +165,12 @@ class searches:
 
         # update database
         for i in range(len(top)):
-            searchDBTop.set(i, json.dumps(top[i]))
+            searchDB.set("top:" + str(i), json.dumps(top[i]))
 
     # retrieve top 20 mappings
     @staticmethod
     def retrieve():
-        top = [searches.getJSON(x) for x in searchDBTop.keys()]
+        top = [searches.getJSON(x) for x in searchDB.keys()
+            if redisKeyEq(x, "top")]
         top.sort(key=(lambda x: x[0]), reverse=True)
         return [x[1] for x in top]
