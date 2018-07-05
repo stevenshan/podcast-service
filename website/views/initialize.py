@@ -14,8 +14,14 @@ badWords = None # list of bad words for filtering
 # Helper
 ###########################################################
 
+def decodeUTF(value):
+    try:
+        return str(value.decode("utf-8"))
+    except:
+        return str(value)
+
 def redisKeyEq(x, value):
-    x = str(x)
+    x = decodeUTF(x)
     return x[:x.find(":")] == str(value)
 
 ###########################################################
@@ -69,6 +75,7 @@ class nameMap:
     # get mapping for podcast name
     @staticmethod
     def lookup(name):
+        name = decodeUTF(name)
         request = nameDB.get(name)
         return request
 
@@ -115,7 +122,8 @@ class searches:
     # get item from redis database as json
     @staticmethod
     def getJSON(x):
-        return json.loads(searchDB.get("top:" + str(x)))
+        x = decodeUTF(x)
+        return json.loads(searchDB.get(x))
 
     @staticmethod
     def filter(query):
@@ -133,7 +141,7 @@ class searches:
         query = query[:25] # limit length of query
 
         # helper method for interacting with database
-        getInt = lambda x: int(searchDB.get("index:" + str(x)))
+        getInt = lambda x: int(searchDB.get("index:" + decodeUTF(x)))
         increment = lambda x: searchDB.set("index:" + str(x), getInt(x) + 1)
 
         # retrieve stuff from database
