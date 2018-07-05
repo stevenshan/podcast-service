@@ -131,7 +131,7 @@ class searches:
         # if word filtered out inappropriate
         return filtered.strip(" ") != query
 
-    # get mapping for podcast name
+    # add query to search history
     @staticmethod
     def add(query):
         # make sure query is appropriate to be saved
@@ -146,6 +146,12 @@ class searches:
 
         # retrieve stuff from database
         libKeys = [x for x in searchDB.keys() if redisKeyEq(x, "index")]
+
+        # remove prefix from keys
+        def removePrefix(x):
+            temp = decodeUTF(x)
+            return temp[temp.find(":") + 1:]
+        libKeys = [removePrefix(x) for x in libKeys]
 
         top = [searches.getJSON(x) for x in searchDB.keys()
             if redisKeyEq(x, "top")]
